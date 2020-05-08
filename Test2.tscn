@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TileSets/TileSet1.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Proj.tscn" type="PackedScene" id=4]
 
 [node name="Map" type="TileMap"]
 position = Vector2( 12.2433, -1.36037 )
@@ -17,3 +18,11 @@ position = Vector2( 55.9848, 281.091 )
 
 [node name="Area2D2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 15.119, 294.192 )
+
+[node name="Area2D3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 229.757, 244.36 )
+rotation = 3.04909
+
+[node name="Area2D4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 134.092, 200.138 )
+rotation = -0.178024

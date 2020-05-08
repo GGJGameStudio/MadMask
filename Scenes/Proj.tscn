@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://SpriteFrames/circle.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scenes/Proj.cs" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 15.0
 
 [node name="Area2D" type="Area2D" groups=[
-"Spikes",
+"Projectiles",
 ]]
 position = Vector2( 140.119, 287.192 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.05, 0.05 )
 frames = ExtResource( 1 )
