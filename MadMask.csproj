@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\MainCharacter.cs" />
+    <Compile Include="Utils\CharacterState.cs" />
+    <Compile Include="Utils\CharacterOrientation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

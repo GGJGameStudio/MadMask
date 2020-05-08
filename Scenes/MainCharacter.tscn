@@ -4,13 +4,13 @@
 [ext_resource path="res://Scenes/MainCharacter.cs" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.47378, 19.4095 )
+extents = Vector2( 7.47378, 25.1161 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.57566, 7.727 )
+position = Vector2( 2.39163, 8.64713 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
