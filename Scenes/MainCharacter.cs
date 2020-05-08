@@ -68,8 +68,10 @@ public class MainCharacter : KinematicBody2D
     {
         if (this.currentOrientation != orientation)
         {
+            var animator = this.GetNode<AnimatedSprite>("AnimatedSprite");
+
             this.currentOrientation = orientation;
-            this.Scale = orientation == CharacterOrientation.Right ? new Vector2(1, 1) : new Vector2(-1, 1);
+            animator.Scale = orientation == CharacterOrientation.Right ? new Vector2(1, 1) : new Vector2(-1, 1);
         }
     }
 }
