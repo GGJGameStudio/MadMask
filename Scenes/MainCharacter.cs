@@ -9,7 +9,7 @@ public class MainCharacter : KinematicBody2D
     private CharacterState currentState = CharacterState.Idle;
     private CharacterOrientation currentOrientation = CharacterOrientation.Right;
 
-    [Export] 
+    [Export]
     public int speed = 200;
 
     public override void _PhysicsProcess(float delta)
@@ -21,18 +21,17 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdateVelocity()
     {
-        velocity = new Vector2(0,1);
+        velocity = new Vector2(0, 1);
 
-        var xAxis = Input.GetJoyAxis(0, (int)JoystickList.Axis0);
+        Console.WriteLine("left: " + Input.GetActionStrength("character_move_left"));
+        Console.WriteLine("right: " + Input.GetActionStrength("character_move_right"));
 
-        if (Mathf.Abs(xAxis) > DeadZone)
-        {
-            velocity.x += xAxis;
-        }
+        velocity.x -= Input.GetActionStrength("character_move_left");
+        velocity.x += Input.GetActionStrength("character_move_right");
 
         velocity = velocity.Normalized() * speed;
 
-        if(velocity.x == 0)
+        if (velocity.x == 0)
         {
             this.UpdateState(CharacterState.Idle);
         }
@@ -45,12 +44,12 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdateState(CharacterState state)
     {
-        if(this.currentState != state)
+        if (this.currentState != state)
         {
             this.currentState = state;
             var animator = this.GetNode<AnimatedSprite>("AnimatedSprite");
 
-            switch(state)
+            switch (state)
             {
                 case CharacterState.Idle:
                     animator.Play("idle");
@@ -67,10 +66,10 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdateOrientation(CharacterOrientation orientation)
     {
-        if(this.currentOrientation != orientation)
+        if (this.currentOrientation != orientation)
         {
             this.currentOrientation = orientation;
-            this.Scale = orientation == CharacterOrientation.Right ? new Vector2(1,1) : new Vector2(-1,1);
+            this.Scale = orientation == CharacterOrientation.Right ? new Vector2(1, 1) : new Vector2(-1, 1);
         }
     }
 }
