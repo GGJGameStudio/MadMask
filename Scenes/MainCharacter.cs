@@ -11,18 +11,37 @@ public class MainCharacter : KinematicBody2D
     private bool jumping;
     private bool hasDoubleJump;
 
+    private bool jump;
+
     [Export]
     public int speed = 200;
     [Export]
-    public int gravity = 100;
+    public int gravity = 40;
     [Export]
-    public int jumpStrength = 200;
+    public int jumpStrength = 600;
+
+
+    private float dashTimer;
+    private float dashTime = 0.15f;
+    private float dashSpeed = 500;
+
+    private float dashForce = 150;
+    
 
     private float maximumVerticalVelocity = 400;
+
+    private float verticalAcceleration = 0;
+
+
+    private float horizontalVelocity = 0;
+    private float horizontalAcceleration = 0;
+    private float horizontalDrag = 30;
 
     public List<Mask> availableMasks = new List<Mask>();
 
     public Mask CurrentMask;
+
+    private PackedScene proj = (PackedScene) GD.Load("res://scenes/Proj.tscn");
 
     public override void _Ready()
     {
@@ -36,11 +55,22 @@ public class MainCharacter : KinematicBody2D
     {
         this.UpdateMask();
 
-        this.UpdateVelocity(delta);
+        
+        if (IsDashing()){
+            dashTimer -= delta;
+            
+            horizontalVelocity = ((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashSpeed;
 
-        this.UpdatePowerState();
+            this.MoveAndSlide(new Vector2(((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashSpeed,0));
+        
+        } else {
+            this.UpdateVelocity(delta);
 
-        this.MoveAndSlide(velocity);
+            this.UpdatePowerState();
+
+            this.MoveAndSlide(velocity);
+        }
+        
 
         if (this.jumping && this.IsOnSomething())
         {
@@ -54,6 +84,10 @@ public class MainCharacter : KinematicBody2D
     private bool IsOnSomething()
     {
         return this.IsOnFloor() || this.IsOnWall();
+    }
+
+    private bool IsDashing(){
+        return dashTimer > 0;
     }
 
     private void UpdateMask()
@@ -75,35 +109,58 @@ public class MainCharacter : KinematicBody2D
     {
         #region vertical velocity
 
-        if (this.IsOnFloor())
+        
+
+        /*if (this.IsOnFloor())
         {
             velocity.y = 0;
         }
         else
         {
             velocity.y = Mathf.Min(this.maximumVerticalVelocity, velocity.y + this.gravity * delta);
+        }*/
+
+        if (jump){
+            this.UpdateState(CharacterState.Jumping);
+            verticalAcceleration = -jumpStrength;
+            jump = false;
+            velocity.y = 0;
+        } else {
+            verticalAcceleration = gravity;
         }
 
+        velocity.y += verticalAcceleration;
+        if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
+
+        
         #endregion
 
         #region horizontal velocity
 
-        var horizontalVelocity = 0f;
+        var horizontalSpeed = 0f;
 
-        horizontalVelocity -= Input.GetActionStrength("character_move_left");
-        horizontalVelocity += Input.GetActionStrength("character_move_right");
+        horizontalSpeed -= Input.GetActionStrength("character_move_left") * speed;
+        horizontalSpeed += Input.GetActionStrength("character_move_right") * speed;
 
-        if (horizontalVelocity == 0)
+        if (horizontalSpeed == 0)
         {
             this.UpdateState(CharacterState.Idle);
         }
         else
         {
             this.UpdateState(CharacterState.Running);
-            this.UpdateOrientation(horizontalVelocity > 0 ? CharacterOrientation.Right : CharacterOrientation.Left);
+            this.UpdateOrientation(horizontalSpeed > 0 ? CharacterOrientation.Right : CharacterOrientation.Left);
         }
 
-        velocity.x = horizontalVelocity * speed;
+        if (horizontalVelocity > 0){
+            horizontalVelocity -= Mathf.Min(horizontalDrag,horizontalVelocity);
+        }
+        if (horizontalVelocity < 0){
+            horizontalVelocity += Mathf.Max(horizontalDrag,horizontalVelocity);
+        }
+
+        velocity.x = horizontalSpeed + horizontalVelocity;
+        
 
         #endregion
     }
@@ -177,7 +234,10 @@ public class MainCharacter : KinematicBody2D
 
     private void DoShot()
     {
-        // TODO
+        var proj_instance = (Node2D) proj.Instance();
+        proj_instance.Rotation = Mathf.Deg2Rad((currentOrientation == CharacterOrientation.Right)? 0 : 180);
+        GetParent().AddChild(proj_instance);
+        proj_instance.Position = Position;
     }
 
     private void DoJump()
@@ -185,15 +245,19 @@ public class MainCharacter : KinematicBody2D
         if (!this.jumping && this.IsOnSomething())
         {
             this.UpdateState(CharacterState.Jumping);
-            this.velocity.y = -this.jumpStrength;
+            //this.velocity.y = -this.jumpStrength;
+            jump = true;
 
             this.GetNode<AnimatedSprite>("AnimatedSprite").Play("jump");
         }
         else if (!hasDoubleJump && !this.IsOnSomething())
         {
             this.hasDoubleJump = true;
-            this.velocity.y = -this.jumpStrength;
+            //this.velocity.y = -this.jumpStrength;
+
+            jump = true;
         }
+        
     }
 
     private void DoTime()
@@ -203,7 +267,8 @@ public class MainCharacter : KinematicBody2D
 
     private void DoDash()
     {
-        // TODO
+        horizontalAcceleration = ((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashForce;
+        dashTimer = dashTime;
     }
 
     public void _onSpikeCollide(Node body)

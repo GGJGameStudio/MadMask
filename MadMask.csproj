@@ -58,6 +58,7 @@
     <Compile Include="Scenes\MainCharacter.cs" />
     <Compile Include="Scenes\Mask.cs" />
     <Compile Include="Scenes\Proj.cs" />
+    <Compile Include="Scenes\Slow.cs" />
     <Compile Include="Utils\MaskType.cs" />
     <Compile Include="Utils\CharacterState.cs" />
     <Compile Include="Utils\CharacterOrientation.cs" />
