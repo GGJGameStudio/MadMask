@@ -12,6 +12,14 @@ public class MainCharacter : KinematicBody2D
     [Export]
     public int speed = 200;
 
+    public override void _Ready()
+    {
+        foreach(Node spike in GetTree().GetNodesInGroup("Spikes")){
+            spike.Connect("body_entered", this, nameof(_onSpikeCollide));
+        }
+    }
+    
+
     public override void _PhysicsProcess(float delta)
     {
         this.UpdateVelocity();
@@ -73,5 +81,9 @@ public class MainCharacter : KinematicBody2D
             this.currentOrientation = orientation;
             animator.Scale = orientation == CharacterOrientation.Right ? new Vector2(1, 1) : new Vector2(-1, 1);
         }
+    }
+
+    public void _onSpikeCollide(Node body){
+        GD.Print("dead");
     }
 }
