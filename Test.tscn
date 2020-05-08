@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TileSets/TileSet1.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/masks/jump_mask.png" type="Texture" id=3]
+[ext_resource path="res://Assets/masks/time_mask.png" type="Texture" id=4]
+[ext_resource path="res://Assets/masks/shot_mask.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Mask.tscn" type="PackedScene" id=6]
 
 [node name="Map" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -11,3 +15,37 @@ tile_data = PoolIntArray( 131075, 16, 0, 131076, 2, 0, 131077, 17, 0, 131082, 16
 [node name="MainCharacter" parent="." instance=ExtResource( 1 )]
 position = Vector2( 15.4694, 283.546 )
 gravity = 200
+
+[node name="Masks" type="Node" parent="."]
+
+[node name="TimeMask" parent="Masks" instance=ExtResource( 6 )]
+position = Vector2( 502.727, 268.81 )
+Type = 3
+
+[node name="Sprite" parent="Masks/TimeMask" index="0"]
+texture = ExtResource( 4 )
+
+[node name="DashMask" parent="Masks" instance=ExtResource( 6 )]
+position = Vector2( 290.78, 479.464 )
+Type = 2
+
+[node name="JumpMask" parent="Masks" instance=ExtResource( 6 )]
+position = Vector2( 81.4185, 292.073 )
+
+[node name="Sprite" parent="Masks/JumpMask" index="0"]
+texture = ExtResource( 3 )
+
+[node name="ShotMask" parent="Masks" instance=ExtResource( 6 )]
+position = Vector2( 277.857, 94.3421 )
+Type = 1
+
+[node name="Sprite" parent="Masks/ShotMask" index="0"]
+texture = ExtResource( 5 )
+
+[editable path="Masks/TimeMask"]
+
+[editable path="Masks/DashMask"]
+
+[editable path="Masks/JumpMask"]
+
+[editable path="Masks/ShotMask"]
