@@ -19,23 +19,6 @@ config/name="MadMask"
 run/main_scene="res://Test.tscn"
 config/icon="res://icon.png"
 
-[input]
-
-player_x_axis={
-"deadzone": 0.5,
-"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
- ]
-}
-player_y_axis={
-"deadzone": 0.5,
-"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
- ]
-}
-
-[mono]
-
-debugger_agent/wait_for_debugger=true
-
 [rendering]
 
 quality/2d/use_pixel_snap=true
