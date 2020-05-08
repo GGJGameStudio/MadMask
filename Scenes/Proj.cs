@@ -11,7 +11,7 @@ public class Proj : Area2D
         
     }
 
- // Called every frame. 'delta' is the elapsed time since the previous frame.
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         Position += new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * speed * delta;

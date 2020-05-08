@@ -8,7 +8,6 @@
 [node name="Area2D" type="Area2D" groups=[
 "Projectiles",
 ]]
-position = Vector2( 140.119, 287.192 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
