@@ -1,16 +1,19 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class MainCharacter : KinematicBody2D
 {
-    private const float DeadZone = 0.2f;
-
     private Vector2 velocity = new Vector2();
     private CharacterState currentState = CharacterState.Idle;
     private CharacterOrientation currentOrientation = CharacterOrientation.Right;
 
     [Export]
     public int speed = 200;
+
+    public List<Mask> availableMasks = new List<Mask>();
+
+    public Mask CurrentMask;
 
     public override void _Ready()
     {
@@ -22,17 +25,31 @@ public class MainCharacter : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
+        this.UpdateMask();
+
         this.UpdateVelocity();
 
         velocity = this.MoveAndSlide(velocity);
     }
 
+    private void UpdateMask()
+    {
+        foreach (var mask in this.availableMasks)
+        {
+            if (this.CurrentMask != mask && Input.IsActionJustPressed(mask.AssociatedAction))
+            {
+                this.CurrentMask?.ChangeState(false);
+                this.CurrentMask = mask;
+                this.CurrentMask.ChangeState(true);
+
+                return;
+            }
+        }
+    }
+
     private void UpdateVelocity()
     {
         velocity = new Vector2(0, 1);
-
-        Console.WriteLine("left: " + Input.GetActionStrength("character_move_left"));
-        Console.WriteLine("right: " + Input.GetActionStrength("character_move_right"));
 
         velocity.x -= Input.GetActionStrength("character_move_left");
         velocity.x += Input.GetActionStrength("character_move_right");
