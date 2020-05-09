@@ -63,6 +63,7 @@
     <Compile Include="Scenes\Shoot.cs" />
     <Compile Include="Scenes\Slow.cs" />
     <Compile Include="Scenes\Spike.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="Utils\MaskType.cs" />
     <Compile Include="Utils\CharacterState.cs" />
     <Compile Include="Utils\CharacterOrientation.cs" />
