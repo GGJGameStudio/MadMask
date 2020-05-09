@@ -57,6 +57,7 @@
     <Compile Include="Scenes\Canon.cs" />
     <Compile Include="Scenes\CharacterHitbox.cs" />
     <Compile Include="Scenes\Dash.cs" />
+    <Compile Include="Scenes\JumpProjArea.cs" />
     <Compile Include="Scenes\MainCharacter.cs" />
     <Compile Include="Scenes\Mask.cs" />
     <Compile Include="Scenes\Proj.cs" />

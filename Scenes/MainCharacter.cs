@@ -41,10 +41,14 @@ public class MainCharacter : KinematicBody2D
 
     private float stunTimer;
 
+    private List<Proj> jumpProj;
+
 
     public override void _Ready()
     {
         dash = GetNode("Dash") as Dash;
+
+        jumpProj = new List<Proj>();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -86,7 +90,7 @@ public class MainCharacter : KinematicBody2D
 
     private bool IsOnSomething()
     {
-        return this.IsOnFloor() || this.IsOnWall();
+        return this.IsOnFloor() || this.IsOnWall() || jumpProj.Count > 0;
     }
 
     private void UpdateMask()
@@ -289,7 +293,14 @@ public class MainCharacter : KinematicBody2D
 
             if (!this.IsOnFloor() && this.IsOnWall())
             {
+                // wall jump
                 Bump(new Vector2(-(int)currentOrientation * 500f, 0), 0.25f);
+            }
+
+            if (!this.IsOnFloor() && !this.IsOnWall() && jumpProj.Count > 0){
+                // proj jump
+                jumpProj[0].QueueFree();
+                jumpProj.RemoveAt(0);
             }
         }
     }
@@ -323,5 +334,13 @@ public class MainCharacter : KinematicBody2D
     public bool IsDashing()
     {
         return dash.IsDashing();
+    }
+
+    public void AddJumpProj(Proj proj){
+        jumpProj.Add(proj);
+    }
+
+    public void RemoveJumpProj(Proj proj){
+        jumpProj.Remove(proj);
     }
 }
