@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MainCharacter : KinematicBody2D
 {
+    private readonly Vector2 UpDirection = new Vector2(0, -1);
+
     private Vector2 velocity = new Vector2();
     private CharacterState currentState = CharacterState.Idle;
     private CharacterOrientation currentOrientation = CharacterOrientation.Right;
@@ -20,18 +22,13 @@ public class MainCharacter : KinematicBody2D
     [Export]
     public int jumpStrength = 600;
 
-
     private float dashTimer;
     private float dashTime = 0.15f;
     private float dashSpeed = 500;
-
     private float dashForce = 150;
-    
 
     private float maximumVerticalVelocity = 400;
-
     private float verticalAcceleration = 0;
-
 
     private float horizontalVelocity = 0;
     private float horizontalAcceleration = 0;
@@ -41,7 +38,7 @@ public class MainCharacter : KinematicBody2D
 
     public Mask CurrentMask;
 
-    private PackedScene proj = (PackedScene) GD.Load("res://scenes/Proj.tscn");
+    private PackedScene proj = (PackedScene)GD.Load("res://scenes/Proj.tscn");
 
     public override void _Ready()
     {
@@ -51,22 +48,22 @@ public class MainCharacter : KinematicBody2D
     {
         this.UpdateMask();
 
-        
-        if (IsDashing()){
+        if (IsDashing())
+        {
             dashTimer -= delta;
-            
-            horizontalVelocity = ((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashSpeed;
 
-            this.MoveAndSlide(new Vector2(((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashSpeed,0));
-        
-        } else {
+            horizontalVelocity = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dashSpeed;
+
+            this.MoveAndSlide(new Vector2(((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dashSpeed, 0), UpDirection);
+        }
+        else
+        {
             this.UpdateVelocity(delta);
 
             this.UpdatePowerState();
 
-            this.MoveAndSlide(velocity);
+            this.MoveAndSlide(velocity, UpDirection);
         }
-        
 
         if (this.jumping && this.IsOnSomething())
         {
@@ -82,7 +79,8 @@ public class MainCharacter : KinematicBody2D
         return this.IsOnFloor() || this.IsOnWall();
     }
 
-    private bool IsDashing(){
+    private bool IsDashing()
+    {
         return dashTimer > 0;
     }
 
@@ -105,30 +103,21 @@ public class MainCharacter : KinematicBody2D
     {
         #region vertical velocity
 
-        
-
-        /*if (this.IsOnFloor())
+        if (jump)
         {
-            velocity.y = 0;
-        }
-        else
-        {
-            velocity.y = Mathf.Min(this.maximumVerticalVelocity, velocity.y + this.gravity * delta);
-        }*/
-
-        if (jump){
             this.UpdateState(CharacterState.Jumping);
             verticalAcceleration = -jumpStrength;
             jump = false;
             velocity.y = 0;
-        } else {
+        }
+        else
+        {
             verticalAcceleration = gravity;
         }
 
         velocity.y += verticalAcceleration;
         if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
 
-        
         #endregion
 
         #region horizontal velocity
@@ -148,15 +137,16 @@ public class MainCharacter : KinematicBody2D
             this.UpdateOrientation(horizontalSpeed > 0 ? CharacterOrientation.Right : CharacterOrientation.Left);
         }
 
-        if (horizontalVelocity > 0){
-            horizontalVelocity -= Mathf.Min(horizontalDrag,horizontalVelocity);
+        if (horizontalVelocity > 0)
+        {
+            horizontalVelocity -= Mathf.Min(horizontalDrag, horizontalVelocity);
         }
-        if (horizontalVelocity < 0){
-            horizontalVelocity += Mathf.Max(horizontalDrag,horizontalVelocity);
+        if (horizontalVelocity < 0)
+        {
+            horizontalVelocity += Mathf.Max(horizontalDrag, horizontalVelocity);
         }
 
         velocity.x = horizontalSpeed + horizontalVelocity;
-        
 
         #endregion
     }
@@ -184,9 +174,6 @@ public class MainCharacter : KinematicBody2D
                         break;
                     case CharacterState.Running:
                         animator.Play("run");
-                        break;
-                    case CharacterState.Jumping:
-
                         break;
                 }
             }
@@ -230,8 +217,8 @@ public class MainCharacter : KinematicBody2D
 
     private void DoShot()
     {
-        var proj_instance = (Node2D) proj.Instance();
-        proj_instance.Rotation = Mathf.Deg2Rad((currentOrientation == CharacterOrientation.Right)? 0 : 180);
+        var proj_instance = (Node2D)proj.Instance();
+        proj_instance.Rotation = Mathf.Deg2Rad((currentOrientation == CharacterOrientation.Right) ? 0 : 180);
         GetParent().AddChild(proj_instance);
         proj_instance.Position = Position;
     }
@@ -241,19 +228,14 @@ public class MainCharacter : KinematicBody2D
         if (!this.jumping && this.IsOnSomething())
         {
             this.UpdateState(CharacterState.Jumping);
-            //this.velocity.y = -this.jumpStrength;
             jump = true;
-
-            this.GetNode<AnimatedSprite>("AnimatedSprite").Play("jump");
         }
         else if (!hasDoubleJump && !this.IsOnSomething())
         {
             this.hasDoubleJump = true;
-            //this.velocity.y = -this.jumpStrength;
-
             jump = true;
         }
-        
+
     }
 
     private void DoTime()
@@ -263,7 +245,7 @@ public class MainCharacter : KinematicBody2D
 
     private void DoDash()
     {
-        horizontalAcceleration = ((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashForce;
+        horizontalAcceleration = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dashForce;
         dashTimer = dashTime;
     }
 }
