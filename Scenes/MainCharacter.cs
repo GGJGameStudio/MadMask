@@ -95,13 +95,39 @@ public class MainCharacter : KinematicBody2D
         {
             if (this.CurrentMask != mask && Input.IsActionJustPressed(mask.AssociatedAction))
             {
-                this.CurrentMask?.ChangeState(false);
-                this.CurrentMask = mask;
-                this.CurrentMask.ChangeState(true);
+                this.ChangeMask(mask);
 
                 return;
             }
         }
+
+        if (this.availableMasks.Count > 0)
+        {
+            if (Input.IsActionJustPressed("wear_next_mask"))
+            {
+                var index = (this.availableMasks.IndexOf(this.CurrentMask) + 1) % this.availableMasks.Count;
+
+                this.ChangeMask(this.availableMasks[index]);
+            }
+            else if (Input.IsActionJustPressed("wear_previous_mask"))
+            {
+                var index = (this.availableMasks.IndexOf(this.CurrentMask) - 1) % this.availableMasks.Count;
+
+                if (index < 0)
+                {
+                    index += this.availableMasks.Count;
+                }
+
+                this.ChangeMask(this.availableMasks[index]);
+            }
+        }
+    }
+
+    private void ChangeMask(Mask newMask)
+    {
+        this.CurrentMask?.ChangeState(false);
+        this.CurrentMask = newMask;
+        this.CurrentMask.ChangeState(true);
     }
 
     private void UpdateVelocity(float delta)
