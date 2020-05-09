@@ -18,7 +18,7 @@ script = ExtResource( 7 )
 
 [node name="MainCharacter" parent="." instance=ExtResource( 1 )]
 position = Vector2( 15.4694, 283.546 )
-jumpStrength = 900
+jumpStrength = 800
 
 [node name="Masks" type="Node" parent="."]
 
