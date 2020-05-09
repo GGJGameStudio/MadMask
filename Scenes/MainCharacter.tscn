@@ -68,3 +68,7 @@ script = ExtResource( 6 )
 
 [node name="Dash" type="Node2D" parent="."]
 script = ExtResource( 7 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+editor_draw_limits = true
