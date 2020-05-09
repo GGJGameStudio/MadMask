@@ -258,7 +258,7 @@ public class MainCharacter : KinematicBody2D
 
     private void DoTime()
     {
-        // TODO
+        (GetNode("SlowArea") as Slow).Activate();
     }
 
     private void DoDash()

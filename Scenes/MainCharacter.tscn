@@ -33,12 +33,12 @@ __meta__ = {
 ]]
 script = ExtResource( 4 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="SlowArea"]
+[node name="SlowEffect" type="AnimatedSprite" parent="SlowArea"]
 modulate = Color( 1, 1, 1, 0.223529 )
 scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SlowArea"]
+[node name="Shape" type="CollisionShape2D" parent="SlowArea"]
 shape = SubResource( 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]

@@ -15,7 +15,7 @@ public class CharacterHitbox : Area2D
 
     public void _onSpikeCollide(Area2D area)
     {
-        if (area.GetType() == typeof(Spike)){
+        if (area is Spike){
             GD.Print("dead");
         }
     }
