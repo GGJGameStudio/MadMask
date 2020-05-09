@@ -13,17 +13,22 @@ public class Dash : Node2D
     private float cooldownTimer;
 
     MainCharacter character;
+    AnimatedSprite characterSprite;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         character = GetParent() as MainCharacter;
+        characterSprite = character.GetNode("AnimatedSprite") as AnimatedSprite;
     }
 
     public override void _Process(float delta)
     {
         if (IsDashing()){
-            timer -= delta; 
+            timer -= delta;
+            characterSprite.Modulate = new Color(1,1,1,0.2f);
+        } else {
+            characterSprite.Modulate = new Color(1,1,1,1);
         }
 
         if (cooldownTimer > 0){
