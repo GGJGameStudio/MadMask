@@ -7,8 +7,8 @@ public class MainCharacter : KinematicBody2D
     private readonly Vector2 UpDirection = new Vector2(0, -1);
 
     private Vector2 velocity = new Vector2();
-    private CharacterState currentState = CharacterState.Idle;
-    private CharacterOrientation currentOrientation = CharacterOrientation.Right;
+    private EntityState currentState = EntityState.Idle;
+    private EntityOrientation currentOrientation = EntityOrientation.Right;
 
     private bool jump;
 
@@ -54,10 +54,13 @@ public class MainCharacter : KinematicBody2D
         if (dash.IsDashing())
         {
             var dashVelocity = new Vector2();
-            if (IsOnFloor()){
-                dashVelocity.x = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed();
-            } else {
-                dashVelocity.x = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed() * 0.4f;
+            if (IsOnFloor())
+            {
+                dashVelocity.x = (int)currentOrientation * dash.GetSpeed();
+            }
+            else
+            {
+                dashVelocity.x = (int)currentOrientation * dash.GetSpeed() * 0.4f;
                 dashVelocity.y = dash.GetSpeed();
             }
 
@@ -75,9 +78,9 @@ public class MainCharacter : KinematicBody2D
             this.MoveAndSlide(velocity, UpDirection);
         }
 
-        if (this.currentState == CharacterState.Jumping && this.IsOnSomething())
+        if (this.currentState == EntityState.Jumping && this.IsOnSomething())
         {
-            this.UpdateState(CharacterState.Idle);
+            this.UpdateState(EntityState.Idle);
         }
     }
 
@@ -107,32 +110,37 @@ public class MainCharacter : KinematicBody2D
 
         var horizontalSpeed = 0f;
 
-        if (IsStunned()){
+        if (IsStunned())
+        {
             stunTimer -= delta;
-        } else {
+        }
+        else
+        {
             horizontalSpeed -= Input.GetActionStrength("character_move_left") * speed;
             horizontalSpeed += Input.GetActionStrength("character_move_right") * speed;
         }
 
         if (horizontalSpeed == 0)
         {
-            this.UpdateState(CharacterState.Idle);
+            this.UpdateState(EntityState.Idle);
         }
         else
         {
-            this.UpdateState(CharacterState.Running);
-            this.UpdateOrientation(horizontalSpeed > 0 ? CharacterOrientation.Right : CharacterOrientation.Left);
+            this.UpdateState(EntityState.Running);
+            this.UpdateOrientation(horizontalSpeed > 0 ? EntityOrientation.Right : EntityOrientation.Left);
         }
 
-        if (jump && dash.IsBoosting()){
-            acceleration.x += dashJumpBoost * ((currentOrientation == CharacterOrientation.Right) ? 1 : -1);
+        if (jump && dash.IsBoosting())
+        {
+            acceleration.x += dashJumpBoost * ((currentOrientation == EntityOrientation.Right) ? 1 : -1);
             GD.Print("boost");
         }
 
         horizontalVelocity += acceleration.x;
 
         var drag = horizontalDrag;
-        if (!IsOnFloor()){
+        if (!IsOnFloor())
+        {
             drag = airHorizontalDrag;
         }
 
@@ -153,11 +161,11 @@ public class MainCharacter : KinematicBody2D
 
         if (jump) // TODO jump plus haut en restant
         {
-            this.UpdateState(CharacterState.Jumping);
+            this.UpdateState(EntityState.Jumping);
             acceleration.y = -jumpStrength;
             jump = false;
             velocity.y = 0;
-            
+
         }
         else
         {
@@ -173,13 +181,13 @@ public class MainCharacter : KinematicBody2D
         acceleration = Vector2.Zero;
     }
 
-    private void UpdateState(CharacterState state)
+    private void UpdateState(EntityState state)
     {
         if (this.currentState != state)
         {
             var animator = this.GetNode<AnimatedSprite>("AnimatedSprite");
 
-            if (state == CharacterState.Jumping)
+            if (state == EntityState.Jumping)
             {
                 this.currentState = state;
                 animator.Play("jump");
@@ -190,10 +198,10 @@ public class MainCharacter : KinematicBody2D
 
                 switch (state)
                 {
-                    case CharacterState.Idle:
+                    case EntityState.Idle:
                         animator.Play("idle");
                         break;
-                    case CharacterState.Running:
+                    case EntityState.Running:
                         animator.Play("run");
                         break;
                 }
@@ -201,7 +209,7 @@ public class MainCharacter : KinematicBody2D
         }
     }
 
-    private void UpdateOrientation(CharacterOrientation orientation)
+    private void UpdateOrientation(EntityOrientation orientation)
     {
         if (this.currentOrientation != orientation)
         {
@@ -253,8 +261,9 @@ public class MainCharacter : KinematicBody2D
         {
             jump = true;
 
-            if (!this.IsOnFloor() && this.IsOnWall()){
-                Bump(new Vector2(((currentOrientation == CharacterOrientation.Right) ? -1 : 1) * 500f, 0), 0.25f);
+            if (!this.IsOnFloor() && this.IsOnWall())
+            {
+                Bump(new Vector2(-(int)currentOrientation * 500f, 0), 0.25f);
             }
         }
     }
@@ -269,16 +278,19 @@ public class MainCharacter : KinematicBody2D
         dash.Activate(currentOrientation);
     }
 
-    public void Bump(Vector2 force, float stunDuration){
+    public void Bump(Vector2 force, float stunDuration)
+    {
         acceleration += force;
         Stun(stunDuration);
     }
 
-    public void Stun(float stunDuration){ // Can't control character
+    public void Stun(float stunDuration)
+    { // Can't control character
         stunTimer = stunDuration;
     }
 
-    public bool IsStunned(){
+    public bool IsStunned()
+    {
         return stunTimer > 0;
     }
 

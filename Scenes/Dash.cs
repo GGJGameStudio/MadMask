@@ -34,7 +34,8 @@ public class Dash : Node2D
             characterSprite.Modulate = new Color(1,1,1,1);
         }
 
-        if (cooldownTimer > 0){
+        if (cooldownTimer > 0)
+        {
             cooldownTimer -= delta;
         }
 
@@ -48,7 +49,8 @@ public class Dash : Node2D
         return timer > 0;
     }
 
-    private bool IsDashReady(){
+    private bool IsDashReady()
+    {
         return cooldownTimer <= 0;
     }
 
@@ -56,7 +58,7 @@ public class Dash : Node2D
         return dashBoostTimer > 0;
     }
 
-    public void Activate(CharacterOrientation orientation){
+    public void Activate(EntityOrientation orientation){
         if (IsDashReady()){
             timer = duration;
             cooldownTimer = cooldown;
@@ -65,7 +67,8 @@ public class Dash : Node2D
         }
     }
 
-    public float GetSpeed(){
+    public float GetSpeed()
+    {
         return speed;
     }
 }

@@ -7,10 +7,24 @@ public class Canon : Node2D
     // private int a = 2;
     // private string b = "text";
 
-    private PackedScene proj = (PackedScene) GD.Load("res://scenes/Proj.tscn");
+    private PackedScene proj = (PackedScene)GD.Load("res://scenes/Proj.tscn");
+
+    private EntityOrientation orientation;
 
     [Export]
-    public float rotation;
+    public EntityOrientation Orientation
+    {
+        get => orientation;
+        set => this.SetOrientation(value);
+    }
+
+    private void SetOrientation(EntityOrientation orientation)
+    {
+        this.orientation = orientation;
+
+        var animator = this.GetNode<AnimatedSprite>("AnimatedSprite");
+        animator.Scale = new Vector2((int)orientation * animator.Scale.x, animator.Scale.y);
+    }
 
     [Export]
     public float rate = 2f;
@@ -31,12 +45,13 @@ public class Canon : Node2D
     {
         timer -= delta;
 
-        if (timer < 0){
-            var proj_instance = (Node2D) proj.Instance();
-            proj_instance.Rotation = Mathf.Deg2Rad(rotation);
+        if (timer < 0)
+        {
+            var proj_instance = (Node2D)proj.Instance();
+            proj_instance.Rotation = Mathf.Deg2Rad(this.orientation == EntityOrientation.Left ? 180 : 0);
             AddChild(proj_instance);
 
-            timer += 1/rate;
+            timer += 1 / rate;
         }
     }
 }

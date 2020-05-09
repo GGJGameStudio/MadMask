@@ -65,8 +65,8 @@
     <Compile Include="Scenes\Spike.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Utils\MaskType.cs" />
-    <Compile Include="Utils\CharacterState.cs" />
-    <Compile Include="Utils\CharacterOrientation.cs" />
+    <Compile Include="Utils\EntityState.cs" />
+    <Compile Include="Utils\EntityOrientation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

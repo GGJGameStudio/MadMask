@@ -20,7 +20,8 @@ public class Proj : Area2D
         Position += new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * (slow ? speed * speedSlow : speed) * delta;
     }
 
-    public void SetSlow(bool slow){
+    public void SetSlow(bool slow)
+    {
         this.slow = slow;
     }
 

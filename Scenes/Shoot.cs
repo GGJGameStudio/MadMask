@@ -12,25 +12,29 @@ public class Shoot : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (cooldown > 0){
+        if (cooldown > 0)
+        {
             cooldown -= delta;
         }
     }
 
-    private bool ShootReady(){
+    private bool ShootReady()
+    {
         return cooldown <= 0;
     }
 
-    public void Activate(CharacterOrientation orientation){
-        if (ShootReady()){
+    public void Activate(EntityOrientation orientation)
+    {
+        if (ShootReady())
+        {
             var proj_instance = (Node2D)proj.Instance();
-            proj_instance.Rotation = Mathf.Deg2Rad((orientation == CharacterOrientation.Right) ? 0 : 180);
+            proj_instance.Rotation = Mathf.Deg2Rad((orientation == EntityOrientation.Right) ? 0 : 180);
             GetParent().GetParent().AddChild(proj_instance);
             proj_instance.GlobalPosition = GlobalPosition;
 

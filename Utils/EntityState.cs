@@ -1,4 +1,4 @@
-public enum CharacterState
+public enum EntityState
 {
     Idle,
     Running,
