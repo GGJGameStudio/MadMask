@@ -51,5 +51,7 @@ public class Mask : Area2D
         mainCharacter.availableMasks.Add(this);
 
         this.Position = new Vector2();
+
+        this.GetNode<Sprite>("Sprite").Scale = mainCharacter.GetNode<AnimatedSprite>("AnimatedSprite").Scale;
     }
 }

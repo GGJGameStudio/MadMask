@@ -167,10 +167,16 @@ public class MainCharacter : KinematicBody2D
     {
         if (this.currentOrientation != orientation)
         {
-            var animator = this.GetNode<AnimatedSprite>("AnimatedSprite");
-
             this.currentOrientation = orientation;
-            animator.Scale = orientation == CharacterOrientation.Right ? new Vector2(1, 1) : new Vector2(-1, 1);
+
+            var characterAnimator = this.GetNode<AnimatedSprite>("AnimatedSprite");
+            characterAnimator.Scale = new Vector2(-characterAnimator.Scale.x, characterAnimator.Scale.y);
+
+            foreach (var mask in this.availableMasks)
+            {
+                var spriteMask = mask.GetNode<Sprite>("Sprite");
+                spriteMask.Scale = characterAnimator.Scale;
+            }
         }
     }
 

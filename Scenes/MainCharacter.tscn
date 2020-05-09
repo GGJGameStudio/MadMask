@@ -2,52 +2,67 @@
 
 [ext_resource path="res://SpriteFrames/MainCharacter.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/MainCharacter.cs" type="Script" id=2]
-[ext_resource path="res://SpriteFrames/circle.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://SpriteFrames/Lightening.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Scenes/Slow.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/CharacterHitbox.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/Shoot.cs" type="Script" id=6]
 [ext_resource path="res://Scenes/Dash.cs" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.47378, 25.1161 )
+extents = Vector2( 11.8029, 27.8074 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 75.0
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.39163, 8.64713 )
-shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2.32454, 5.0365 )
+shape = SubResource( 1 )
+
 [node name="SlowArea" type="Area2D" parent="." groups=[
 "Slow",
 ]]
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SlowEffect" type="AnimatedSprite" parent="SlowArea"]
 modulate = Color( 1, 1, 1, 0.223529 )
 scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Shape" type="CollisionShape2D" parent="SlowArea"]
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Hitbox" type="Area2D" parent="."]
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 2.39163, 8.64713 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -2.32454, 5.0365 )
 shape = SubResource( 1 )
 
 [node name="Shoot" type="Node2D" parent="."]
