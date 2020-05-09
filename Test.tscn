@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TileSets/TileSet1.tres" type="TileSet" id=2]
-[ext_resource path="res://Assets/masks/jump_mask.png" type="Texture" id=3]
-[ext_resource path="res://Assets/masks/dash_mask.png" type="Texture" id=4]
-[ext_resource path="res://Assets/masks/shot_mask.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/Mask.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Masks/ShotMask.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Masks/DashMask.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Masks/TimeMask.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Test.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/Canon.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=9]
@@ -23,36 +23,24 @@ __meta__ = {
 position = Vector2( 15.4694, 283.546 )
 jumpStrength = 800
 
-[node name="Camera2D" parent="MainCharacter" index="6"]
+[node name="Camera2D" parent="MainCharacter" index="7"]
 limit_left = 0
 limit_right = 2400
 limit_bottom = 600
 
 [node name="Masks" type="Node" parent="."]
 
-[node name="TimeMask" parent="Masks" instance=ExtResource( 6 )]
-position = Vector2( 502.727, 268.81 )
-Type = 3
+[node name="Area2D" parent="Masks" instance=ExtResource( 4 )]
+position = Vector2( 292.52, 478.669 )
 
-[node name="DashMask" parent="Masks" instance=ExtResource( 6 )]
-position = Vector2( 290.78, 479.464 )
-Type = 2
+[node name="Area2D2" parent="Masks" instance=ExtResource( 6 )]
+position = Vector2( 84.4729, 275.074 )
 
-[node name="Sprite" parent="Masks/DashMask" index="0"]
-texture = ExtResource( 4 )
+[node name="Area2D3" parent="Masks" instance=ExtResource( 3 )]
+position = Vector2( 512.173, 279.506 )
 
-[node name="JumpMask" parent="Masks" instance=ExtResource( 6 )]
-position = Vector2( 81.4185, 292.073 )
-
-[node name="Sprite" parent="Masks/JumpMask" index="0"]
-texture = ExtResource( 3 )
-
-[node name="ShotMask" parent="Masks" instance=ExtResource( 6 )]
-position = Vector2( 277.857, 94.3421 )
-Type = 1
-
-[node name="Sprite" parent="Masks/ShotMask" index="0"]
-texture = ExtResource( 5 )
+[node name="Area2D4" parent="Masks" instance=ExtResource( 5 )]
+position = Vector2( 283.918, 88.9244 )
 
 [node name="Canon" parent="." instance=ExtResource( 8 )]
 position = Vector2( 719.561, 491.241 )
@@ -62,11 +50,3 @@ Orientation = 1
 position = Vector2( 733.31, 106.981 )
 
 [editable path="MainCharacter"]
-
-[editable path="Masks/TimeMask"]
-
-[editable path="Masks/DashMask"]
-
-[editable path="Masks/JumpMask"]
-
-[editable path="Masks/ShotMask"]

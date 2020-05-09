@@ -59,7 +59,7 @@
     <Compile Include="Scenes\Dash.cs" />
     <Compile Include="Scenes\JumpProjArea.cs" />
     <Compile Include="Scenes\MainCharacter.cs" />
-    <Compile Include="Scenes\Mask.cs" />
+    <Compile Include="Scenes\Masks\Mask.cs" />
     <Compile Include="Scenes\Proj.cs" />
     <Compile Include="Scenes\Shoot.cs" />
     <Compile Include="Scenes\Slow.cs" />
