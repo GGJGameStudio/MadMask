@@ -45,10 +45,6 @@ public class MainCharacter : KinematicBody2D
 
     public override void _Ready()
     {
-        foreach (Node spike in GetTree().GetNodesInGroup("Spikes"))
-        {
-            spike.Connect("body_entered", this, nameof(_onSpikeCollide));
-        }
     }
 
     public override void _PhysicsProcess(float delta)
@@ -269,10 +265,5 @@ public class MainCharacter : KinematicBody2D
     {
         horizontalAcceleration = ((currentOrientation == CharacterOrientation.Right) ? 1:-1) * dashForce;
         dashTimer = dashTime;
-    }
-
-    public void _onSpikeCollide(Node body)
-    {
-        GD.Print("dead");
     }
 }
