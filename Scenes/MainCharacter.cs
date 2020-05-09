@@ -15,13 +15,19 @@ public class MainCharacter : KinematicBody2D
     [Export]
     public int speed = 200;
     [Export]
-    public int gravity = 40;
+    public int gravity = 30;
     [Export]
     public int jumpStrength = 600;
+
+    private float wallJumpForce = 400;
+
+    private float wallJumpStunDuration = 0.10f;
 
     private float maximumVerticalVelocity = 400;
     private float horizontalVelocity = 0;
     private float horizontalDrag = 30;
+
+    private float airHorizontalDrag = 15;
 
     private Vector2 acceleration;
 
@@ -109,13 +115,18 @@ public class MainCharacter : KinematicBody2D
 
         horizontalVelocity += acceleration.x;
 
+        var drag = horizontalDrag;
+        if (!IsOnFloor()){
+            drag = airHorizontalDrag;
+        }
+
         if (horizontalVelocity > 0)
         {
-            horizontalVelocity -= Mathf.Min(horizontalDrag, horizontalVelocity);
+            horizontalVelocity -= Mathf.Min(drag, horizontalVelocity);
         }
         if (horizontalVelocity < 0)
         {
-            horizontalVelocity += Mathf.Max(horizontalDrag, horizontalVelocity);
+            horizontalVelocity += Mathf.Max(drag, horizontalVelocity);
         }
 
         velocity.x = horizontalSpeed + horizontalVelocity;
@@ -224,6 +235,10 @@ public class MainCharacter : KinematicBody2D
         if (this.IsOnSomething())
         {
             jump = true;
+
+            if (!this.IsOnFloor() && this.IsOnWall()){
+                Bump(new Vector2(((currentOrientation == CharacterOrientation.Right) ? -1 : 1) * 500f, 0), 0.25f);
+            }
         }
     }
 

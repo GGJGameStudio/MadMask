@@ -25,7 +25,6 @@ public class CharacterHitbox : Area2D
             }
 
             if (area is Proj proj){
-                GD.Print("bump");
                 character.Bump(new Vector2((proj.IsDirectionRight() ? 1 : -1) * bumpForce,-bumpForce), bumpDuration);
                 proj.QueueFree();
             }
