@@ -29,16 +29,23 @@ public class Shoot : Node2D
         return cooldown <= 0;
     }
 
-    public void Activate(EntityOrientation orientation)
+    public bool Activate(EntityOrientation orientation, bool boosted)
     {
         if (ShootReady())
         {
-            var proj_instance = (Node2D)proj.Instance();
+            var proj_instance = (Proj)proj.Instance();
             proj_instance.Rotation = Mathf.Deg2Rad((orientation == EntityOrientation.Right) ? 0 : 180);
+            if (boosted){
+               proj_instance.SetBoosted();
+            }
             GetParent().GetParent().AddChild(proj_instance);
             proj_instance.GlobalPosition = GlobalPosition;
+            
 
             cooldown = 1 / rate;
+            return true;
         }
+
+        return false;
     }
 }

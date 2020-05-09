@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TileSets/TileSet1.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Masks/DashMask.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Canon.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Mask.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Masks/ShotMask.tscn" type="PackedScene" id=7]
 
 [node name="Map" type="TileMap"]
 position = Vector2( 12.2433, -1.36037 )
@@ -16,17 +18,19 @@ tile_data = PoolIntArray( 65535, 1, 0, 131071, 1, 0, 65539, 1, 0, 196607, 1, 0, 
 position = Vector2( 50.0175, 282.426 )
 
 [node name="Area2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( 217.866, 290.365 )
+position = Vector2( 570.867, 295.365 )
 
 [node name="Area2D2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 15.119, 294.192 )
+position = Vector2( 489.12, 300.192 )
 
 [node name="AnimatedSprite" parent="." instance=ExtResource( 5 )]
 position = Vector2( 307.45, 246.98 )
 
-[node name="Area2D6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 105.485, 295.359 )
-Type = 3
+[node name="Area2D3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 200.757, 285.361 )
 
-[node name="Area2D7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 146.739, 293.772 )
+[node name="Area2D4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 162.757, 260.361 )
+
+[node name="Area2D5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 139.757, 291.361 )

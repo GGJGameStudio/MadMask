@@ -38,8 +38,10 @@ public class MainCharacter : KinematicBody2D
     public Mask CurrentMask;
 
     private Dash dash;
+    private Shoot shoot;
 
     private float stunTimer;
+    private float noGravityTimer;
 
     private List<Proj> jumpProj;
 
@@ -47,6 +49,7 @@ public class MainCharacter : KinematicBody2D
     public override void _Ready()
     {
         dash = GetNode("Dash") as Dash;
+        shoot = GetNode("Shoot") as Shoot;
 
         jumpProj = new List<Proj>();
     }
@@ -75,9 +78,9 @@ public class MainCharacter : KinematicBody2D
         }
         else
         {
-            this.UpdateVelocity(delta);
-
             this.UpdatePowerState();
+
+            this.UpdateVelocity(delta);
 
             this.MoveAndSlide(velocity, UpDirection);
         }
@@ -163,7 +166,6 @@ public class MainCharacter : KinematicBody2D
         if (jump && dash.IsBoosting())
         {
             acceleration.x += dashJumpBoost * ((currentOrientation == EntityOrientation.Right) ? 1 : -1);
-            GD.Print("boost");
         }
 
         horizontalVelocity += acceleration.x;
@@ -189,20 +191,27 @@ public class MainCharacter : KinematicBody2D
 
         #region vertical velocity
 
+        
+        
         if (jump) // TODO jump plus haut en restant
         {
             this.UpdateState(EntityState.Jumping);
-            acceleration.y = -jumpStrength;
+            acceleration.y += -jumpStrength;
             jump = false;
             velocity.y = 0;
 
         }
         else
         {
-            acceleration.y = gravity;
+            if (noGravityTimer > 0){
+                noGravityTimer -= delta;
+            } else {
+                acceleration.y += gravity;
+            }
         }
 
         velocity.y += acceleration.y;
+
         if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
 
         #endregion
@@ -282,7 +291,12 @@ public class MainCharacter : KinematicBody2D
 
     private void DoShot()
     {
-        (GetNode("Shoot") as Shoot).Activate(currentOrientation);
+        var result = shoot.Activate(currentOrientation, dash.IsBoosting());
+        if (result){
+            velocity = Vector2.Zero;
+            StopGravity(0.25f);
+            Stun(0.25f);
+        }
     }
 
     private void DoJump()
@@ -324,6 +338,10 @@ public class MainCharacter : KinematicBody2D
     public void Stun(float stunDuration)
     { // Can't control character
         stunTimer = stunDuration;
+    }
+
+    public void StopGravity(float duration){
+        noGravityTimer = duration;
     }
 
     public bool IsStunned()

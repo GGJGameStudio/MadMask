@@ -20,7 +20,6 @@ public class JumpProjArea : Area2D
     public void _on_area_entered(Area2D area)
     {
         if (area is Proj proj){
-            GD.Print("test");
             character.AddJumpProj(proj);
         }
     }
@@ -28,7 +27,6 @@ public class JumpProjArea : Area2D
     public void _on_area_exited(Area2D area)
     {
         if (area is Proj proj){
-            GD.Print("test2");
             character.RemoveJumpProj(proj);
         }
     }

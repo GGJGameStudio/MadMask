@@ -66,7 +66,7 @@ position = Vector2( -2.32454, 5.0365 )
 shape = SubResource( 1 )
 
 [node name="Shoot" type="Node2D" parent="."]
-position = Vector2( 5, -10 )
+position = Vector2( 15, -30 )
 script = ExtResource( 6 )
 
 [node name="Dash" type="Node2D" parent="."]
@@ -79,9 +79,9 @@ script = ExtResource( 8 )
 position = Vector2( 0, 40 )
 scale = Vector2( 2, 1.5 )
 shape = SubResource( 3 )
-[connection signal="area_entered" from="JumpProjArea" to="JumpProjArea" method="_on_area_entered"]
-[connection signal="area_exited" from="JumpProjArea" to="JumpProjArea" method="_on_area_exited"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 editor_draw_limits = true
+[connection signal="area_entered" from="JumpProjArea" to="JumpProjArea" method="_on_area_entered"]
+[connection signal="area_exited" from="JumpProjArea" to="JumpProjArea" method="_on_area_exited"]
