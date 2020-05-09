@@ -18,6 +18,7 @@ public class MainCharacter : KinematicBody2D
     public int gravity = 30;
     [Export]
     public int jumpStrength = 600;
+    private float dashJumpBoost = 250;
 
     private float wallJumpForce = 400;
 
@@ -25,9 +26,10 @@ public class MainCharacter : KinematicBody2D
 
     private float maximumVerticalVelocity = 400;
     private float horizontalVelocity = 0;
-    private float horizontalDrag = 30;
+    private float horizontalDrag = 50;
 
     private float airHorizontalDrag = 15;
+
 
     private Vector2 acceleration;
 
@@ -122,6 +124,11 @@ public class MainCharacter : KinematicBody2D
             this.UpdateOrientation(horizontalSpeed > 0 ? CharacterOrientation.Right : CharacterOrientation.Left);
         }
 
+        if (jump && dash.IsBoosting()){
+            acceleration.x += dashJumpBoost * ((currentOrientation == CharacterOrientation.Right) ? 1 : -1);
+            GD.Print("boost");
+        }
+
         horizontalVelocity += acceleration.x;
 
         var drag = horizontalDrag;
@@ -150,6 +157,7 @@ public class MainCharacter : KinematicBody2D
             acceleration.y = -jumpStrength;
             jump = false;
             velocity.y = 0;
+            
         }
         else
         {
@@ -258,7 +266,7 @@ public class MainCharacter : KinematicBody2D
 
     private void DoDash()
     {
-        (GetNode("Dash") as Dash).Activate(currentOrientation);
+        dash.Activate(currentOrientation);
     }
 
     public void Bump(Vector2 force, float stunDuration){

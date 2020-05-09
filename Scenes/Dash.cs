@@ -5,12 +5,15 @@ public class Dash : Node2D
 {
     private float timer;
     private float duration = 0.15f;
-    private float speed = 500;
+    private float speed = 700;
     private float force = 150;
 
     private float cooldown = 0.6f;
 
     private float cooldownTimer;
+
+    private float dashBoostTime = 0.5f;
+    private float dashBoostTimer;
 
     MainCharacter character;
     AnimatedSprite characterSprite;
@@ -34,6 +37,10 @@ public class Dash : Node2D
         if (cooldownTimer > 0){
             cooldownTimer -= delta;
         }
+
+        if (IsBoosting()){
+            dashBoostTimer -= delta;
+        }
     }
 
     public bool IsDashing()
@@ -45,10 +52,16 @@ public class Dash : Node2D
         return cooldownTimer <= 0;
     }
 
+    public bool IsBoosting(){
+        return dashBoostTimer > 0;
+    }
+
     public void Activate(CharacterOrientation orientation){
         if (IsDashReady()){
             timer = duration;
             cooldownTimer = cooldown;
+            character.Stun(duration);
+            dashBoostTimer = dashBoostTime;
         }
     }
 
