@@ -23,4 +23,8 @@ public class Proj : Area2D
     public void SetSlow(bool slow){
         this.slow = slow;
     }
+
+    public bool IsDirectionRight(){
+        return Rotation == 0;
+    }
 }

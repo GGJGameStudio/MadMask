@@ -20,17 +20,18 @@ public class MainCharacter : KinematicBody2D
     public int jumpStrength = 600;
 
     private float maximumVerticalVelocity = 400;
-    private float verticalAcceleration = 0;
-
     private float horizontalVelocity = 0;
-    private float horizontalAcceleration = 0;
     private float horizontalDrag = 30;
+
+    private Vector2 acceleration;
 
     public List<Mask> availableMasks = new List<Mask>();
 
     public Mask CurrentMask;
 
     private Dash dash;
+
+    private float stunTimer;
 
 
     public override void _Ready()
@@ -89,8 +90,12 @@ public class MainCharacter : KinematicBody2D
 
         var horizontalSpeed = 0f;
 
-        horizontalSpeed -= Input.GetActionStrength("character_move_left") * speed;
-        horizontalSpeed += Input.GetActionStrength("character_move_right") * speed;
+        if (IsStunned()){
+            stunTimer -= delta;
+        } else {
+            horizontalSpeed -= Input.GetActionStrength("character_move_left") * speed;
+            horizontalSpeed += Input.GetActionStrength("character_move_right") * speed;
+        }
 
         if (horizontalSpeed == 0)
         {
@@ -101,6 +106,8 @@ public class MainCharacter : KinematicBody2D
             this.UpdateState(CharacterState.Running);
             this.UpdateOrientation(horizontalSpeed > 0 ? CharacterOrientation.Right : CharacterOrientation.Left);
         }
+
+        horizontalVelocity += acceleration.x;
 
         if (horizontalVelocity > 0)
         {
@@ -117,22 +124,25 @@ public class MainCharacter : KinematicBody2D
 
         #region vertical velocity
 
-        if (jump)
+        if (jump) // TODO jump plus haut en restant
         {
             this.UpdateState(CharacterState.Jumping);
-            verticalAcceleration = -jumpStrength;
+            acceleration.y = -jumpStrength;
             jump = false;
             velocity.y = 0;
         }
         else
         {
-            verticalAcceleration = gravity;
+            acceleration.y = gravity;
         }
 
-        velocity.y += verticalAcceleration;
+        velocity.y += acceleration.y;
         if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
 
         #endregion
+
+        // reset acceleration
+        acceleration = Vector2.Zero;
     }
 
     private void UpdateState(CharacterState state)
@@ -227,8 +237,17 @@ public class MainCharacter : KinematicBody2D
         (GetNode("Dash") as Dash).Activate(currentOrientation);
     }
 
-    public void SetHorizontalAcceleration(float acceleration){
-        horizontalAcceleration = acceleration;
+    public void Bump(Vector2 force, float stunDuration){
+        acceleration += force;
+        Stun(stunDuration);
+    }
+
+    public void Stun(float stunDuration){ // Can't control character
+        stunTimer = stunDuration;
+    }
+
+    public bool IsStunned(){
+        return stunTimer > 0;
     }
 
     public bool IsDashing()

@@ -42,7 +42,6 @@ public class Dash : Node2D
 
     public void Activate(CharacterOrientation orientation){
         if (IsDashReady()){
-            character.SetHorizontalAcceleration(((orientation == CharacterOrientation.Right) ? 1 : -1) * force);
             timer = duration;
             cooldownTimer = cooldown;
         }
