@@ -10,9 +10,6 @@ public class MainCharacter : KinematicBody2D
     private CharacterState currentState = CharacterState.Idle;
     private CharacterOrientation currentOrientation = CharacterOrientation.Right;
 
-    private bool jumping;
-    private bool hasDoubleJump;
-
     private bool jump;
 
     [Export]
@@ -65,11 +62,8 @@ public class MainCharacter : KinematicBody2D
             this.MoveAndSlide(velocity, UpDirection);
         }
 
-        if (this.jumping && this.IsOnSomething())
+        if (this.currentState == CharacterState.Jumping && this.IsOnSomething())
         {
-            this.hasDoubleJump = false;
-            this.jumping = false;
-
             this.UpdateState(CharacterState.Idle);
         }
     }
@@ -101,25 +95,6 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdateVelocity(float delta)
     {
-        #region vertical velocity
-
-        if (jump)
-        {
-            this.UpdateState(CharacterState.Jumping);
-            verticalAcceleration = -jumpStrength;
-            jump = false;
-            velocity.y = 0;
-        }
-        else
-        {
-            verticalAcceleration = gravity;
-        }
-
-        velocity.y += verticalAcceleration;
-        if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
-
-        #endregion
-
         #region horizontal velocity
 
         var horizontalSpeed = 0f;
@@ -149,6 +124,25 @@ public class MainCharacter : KinematicBody2D
         velocity.x = horizontalSpeed + horizontalVelocity;
 
         #endregion
+
+        #region vertical velocity
+
+        if (jump)
+        {
+            this.UpdateState(CharacterState.Jumping);
+            verticalAcceleration = -jumpStrength;
+            jump = false;
+            velocity.y = 0;
+        }
+        else
+        {
+            verticalAcceleration = gravity;
+        }
+
+        velocity.y += verticalAcceleration;
+        if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
+
+        #endregion
     }
 
     private void UpdateState(CharacterState state)
@@ -160,10 +154,9 @@ public class MainCharacter : KinematicBody2D
             if (state == CharacterState.Jumping)
             {
                 this.currentState = state;
-                this.jumping = true;
                 animator.Play("jump");
             }
-            else if (!this.jumping)
+            else if (this.IsOnSomething())
             {
                 this.currentState = state;
 
@@ -225,17 +218,10 @@ public class MainCharacter : KinematicBody2D
 
     private void DoJump()
     {
-        if (!this.jumping && this.IsOnSomething())
+        if (this.IsOnSomething())
         {
-            this.UpdateState(CharacterState.Jumping);
             jump = true;
         }
-        else if (!hasDoubleJump && !this.IsOnSomething())
-        {
-            this.hasDoubleJump = true;
-            jump = true;
-        }
-
     }
 
     private void DoTime()
