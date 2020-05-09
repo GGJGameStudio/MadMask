@@ -51,9 +51,18 @@ public class MainCharacter : KinematicBody2D
 
         if (dash.IsDashing())
         {
-            horizontalVelocity = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed();
+            var dashVelocity = new Vector2();
+            if (IsOnFloor()){
+                dashVelocity.x = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed();
+            } else {
+                dashVelocity.x = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed() * 0.4f;
+                dashVelocity.y = dash.GetSpeed();
+            }
 
-            this.MoveAndSlide(new Vector2(((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed(), 0), UpDirection);
+            horizontalVelocity = dashVelocity.x;
+            velocity.y = dashVelocity.y;
+
+            this.MoveAndSlide(dashVelocity, UpDirection);
         }
         else
         {
