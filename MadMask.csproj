@@ -56,9 +56,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\Canon.cs" />
     <Compile Include="Scenes\CharacterHitbox.cs" />
+    <Compile Include="Scenes\Dash.cs" />
     <Compile Include="Scenes\MainCharacter.cs" />
     <Compile Include="Scenes\Mask.cs" />
     <Compile Include="Scenes\Proj.cs" />
+    <Compile Include="Scenes\Shoot.cs" />
     <Compile Include="Scenes\Slow.cs" />
     <Compile Include="Scenes\Spike.cs" />
     <Compile Include="Utils\MaskType.cs" />

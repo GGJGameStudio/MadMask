@@ -22,11 +22,6 @@ public class MainCharacter : KinematicBody2D
     [Export]
     public int jumpStrength = 600;
 
-    private float dashTimer;
-    private float dashTime = 0.15f;
-    private float dashSpeed = 500;
-    private float dashForce = 150;
-
     private float maximumVerticalVelocity = 400;
     private float verticalAcceleration = 0;
 
@@ -38,23 +33,23 @@ public class MainCharacter : KinematicBody2D
 
     public Mask CurrentMask;
 
-    private PackedScene proj = (PackedScene)GD.Load("res://scenes/Proj.tscn");
+    private Dash dash;
+
 
     public override void _Ready()
     {
+        dash = GetNode("Dash") as Dash;
     }
 
     public override void _PhysicsProcess(float delta)
     {
         this.UpdateMask();
 
-        if (IsDashing())
+        if (dash.IsDashing())
         {
-            dashTimer -= delta;
+            horizontalVelocity = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed();
 
-            horizontalVelocity = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dashSpeed;
-
-            this.MoveAndSlide(new Vector2(((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dashSpeed, 0), UpDirection);
+            this.MoveAndSlide(new Vector2(((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dash.GetSpeed(), 0), UpDirection);
         }
         else
         {
@@ -77,11 +72,6 @@ public class MainCharacter : KinematicBody2D
     private bool IsOnSomething()
     {
         return this.IsOnFloor() || this.IsOnWall();
-    }
-
-    private bool IsDashing()
-    {
-        return dashTimer > 0;
     }
 
     private void UpdateMask()
@@ -217,10 +207,7 @@ public class MainCharacter : KinematicBody2D
 
     private void DoShot()
     {
-        var proj_instance = (Node2D)proj.Instance();
-        proj_instance.Rotation = Mathf.Deg2Rad((currentOrientation == CharacterOrientation.Right) ? 0 : 180);
-        GetParent().AddChild(proj_instance);
-        proj_instance.Position = Position;
+        (GetNode("Shoot") as Shoot).Activate(currentOrientation);
     }
 
     private void DoJump()
@@ -245,7 +232,15 @@ public class MainCharacter : KinematicBody2D
 
     private void DoDash()
     {
-        horizontalAcceleration = ((currentOrientation == CharacterOrientation.Right) ? 1 : -1) * dashForce;
-        dashTimer = dashTime;
+        (GetNode("Dash") as Dash).Activate(currentOrientation);
+    }
+
+    public void SetHorizontalAcceleration(float acceleration){
+        horizontalAcceleration = acceleration;
+    }
+
+    public bool IsDashing()
+    {
+        return dash.IsDashing();
     }
 }

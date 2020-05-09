@@ -16,6 +16,7 @@ tile_data = PoolIntArray( 131075, 16, 0, 131076, 2, 0, 131077, 17, 0, 131082, 16
 position = Vector2( 50.0175, 282.426 )
 
 [node name="Area2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 217.866, 290.365 )
 
 [node name="Area2D2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 15.119, 294.192 )
@@ -25,4 +26,4 @@ position = Vector2( 307.45, 246.98 )
 
 [node name="Area2D6" parent="." instance=ExtResource( 6 )]
 position = Vector2( 105.485, 295.359 )
-Type = 3
+Type = 2
