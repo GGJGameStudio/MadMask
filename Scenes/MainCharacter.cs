@@ -20,15 +20,20 @@ public class MainCharacter : KinematicBody2D
     public int jumpStrength = 600;
     private float dashJumpBoost = 250;
 
-    private float wallJumpForce = 400;
+    private float wallJumpForce = 500;
 
-    private float wallJumpStunDuration = 0.10f;
+    private float wallJumpStunDuration = 0.25f;
+
+    private float wallJumpSnapDuration = 0.2f;
+    private float wallJumpSnapTimer;
 
     private float maximumVerticalVelocity = 400;
     private float horizontalVelocity = 0;
     private float horizontalDrag = 50;
 
     private float airHorizontalDrag = 15;
+
+    private float verticalWallDrag = 20f;
 
 
     private Vector2 acceleration;
@@ -93,7 +98,7 @@ public class MainCharacter : KinematicBody2D
 
     private bool IsOnSomething()
     {
-        return this.IsOnFloor() || this.IsOnWall() || jumpProj.Count > 0;
+        return this.IsOnFloor() || this.IsOnWall() || IsOnWallSnap() || jumpProj.Count > 0;
     }
 
     private void UpdateMask()
@@ -170,19 +175,19 @@ public class MainCharacter : KinematicBody2D
 
         horizontalVelocity += acceleration.x;
 
-        var drag = horizontalDrag;
+        var hdrag = horizontalDrag;
         if (!IsOnFloor())
         {
-            drag = airHorizontalDrag;
+            hdrag = airHorizontalDrag;
         }
 
         if (horizontalVelocity > 0)
         {
-            horizontalVelocity -= Mathf.Min(drag, horizontalVelocity);
+            horizontalVelocity -= Mathf.Min(hdrag, horizontalVelocity);
         }
         if (horizontalVelocity < 0)
         {
-            horizontalVelocity += Mathf.Max(drag, horizontalVelocity);
+            horizontalVelocity += Mathf.Max(hdrag, horizontalVelocity);
         }
 
         velocity.x = horizontalSpeed + horizontalVelocity;
@@ -191,7 +196,13 @@ public class MainCharacter : KinematicBody2D
 
         #region vertical velocity
 
-        
+        var vdrag = 0f;
+        if (IsOnWall()){
+            wallJumpSnapTimer = wallJumpSnapDuration;
+            vdrag = verticalWallDrag;
+        } else {
+            wallJumpSnapTimer -= delta;
+        }
         
         if (jump) // TODO jump plus haut en restant
         {
@@ -212,6 +223,7 @@ public class MainCharacter : KinematicBody2D
 
         velocity.y += acceleration.y;
 
+        if (velocity.y > 0) velocity.y -= Mathf.Min(vdrag, velocity.y);
         if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
 
         #endregion
@@ -308,10 +320,16 @@ public class MainCharacter : KinematicBody2D
             if (!this.IsOnFloor() && this.IsOnWall())
             {
                 // wall jump
-                Bump(new Vector2(-(int)currentOrientation * 500f, 0), 0.25f);
+                Bump(new Vector2(-(int)currentOrientation * wallJumpForce, 0), wallJumpStunDuration);
             }
 
-            if (!this.IsOnFloor() && !this.IsOnWall() && jumpProj.Count > 0){
+            if (!this.IsOnFloor() && !this.IsOnWall() && this.IsOnWallSnap())
+            {
+                // wall jump
+                Bump(new Vector2((int)currentOrientation * wallJumpForce, 0), wallJumpStunDuration);
+            }
+
+            if (!this.IsOnFloor() && !this.IsOnWall() && !this.IsOnWallSnap() && jumpProj.Count > 0){
                 // proj jump
                 jumpProj[0].QueueFree();
                 jumpProj.RemoveAt(0);
@@ -354,6 +372,9 @@ public class MainCharacter : KinematicBody2D
         return dash.IsDashing();
     }
 
+    public bool IsOnWallSnap(){
+        return wallJumpSnapTimer > 0;
+    }
     public void AddJumpProj(Proj proj){
         jumpProj.Add(proj);
     }
