@@ -1,4 +1,4 @@
 public class Game {
 
-    public static string currentLevel = "LevelA1";
+    public static string currentLevel = "LevelB1";
 }

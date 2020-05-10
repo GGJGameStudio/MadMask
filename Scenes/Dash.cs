@@ -5,7 +5,7 @@ public class Dash : Node2D
 {
     private float timer;
     private float duration = 0.15f;
-    private float speed = 700;
+    private float speed = 800f;
     private float cooldown = 0.6f;
 
     private float cooldownTimer;
