@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spike monster A.png-7e13f106cb110417f3013e03f4cae092.stex"
+path="res://.import/idle1.png-6f33558790789c4520fe9f03cb6ecfc2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/spike/spike monster A.png"
-dest_files=[ "res://.import/spike monster A.png-7e13f106cb110417f3013e03f4cae092.stex" ]
+source_file="res://Assets/floating_spike/idle1.png"
+dest_files=[ "res://.import/idle1.png-6f33558790789c4520fe9f03cb6ecfc2.stex" ]
 
 [params]
 

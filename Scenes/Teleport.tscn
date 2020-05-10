@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/teleport/activated/activated1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/teleport/activated/activated2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/teleport/standBy/standBy3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/teleport/standBy/standBy2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/teleport/activated/activated3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/teleport/standBy/standBy1.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "activated",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "standBy",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 19.9871
+height = 99.0932
+
+[node name="Area2D" type="Area2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "standBy"
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7.4 )
+shape = SubResource( 2 )
