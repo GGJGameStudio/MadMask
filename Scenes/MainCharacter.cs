@@ -12,17 +12,23 @@ public class MainCharacter : KinematicBody2D
     private EntityState currentState = EntityState.Idle;
     private EntityOrientation currentOrientation = EntityOrientation.Right;
 
-    private bool jump;
-
     [Export]
     public int speed = 200;
     [Export]
     public int gravity = 30;
-    [Export]
-    public int jumpStrength = 600;
+
+    public int jumpStrength = 300;
+    public int jumpSecondaryStrength = 60;
+
+    private bool jump;
+    private bool wallJump;
+    private float jumpTimer;
+
+    private float jumpDuration = 0.15f;
     private float dashJumpBoost = 250;
 
-    private float wallJumpForce = 500;
+    private float wallJumpForce = 400;
+    private float wallJumpVForce = 650;
 
     private float wallJumpStunDuration = 0.25f;
 
@@ -176,7 +182,7 @@ public class MainCharacter : KinematicBody2D
             this.UpdateOrientation(horizontalSpeed > 0 ? EntityOrientation.Right : EntityOrientation.Left);
         }
 
-        if (jump && dash.IsBoosting())
+        if (IsJumping() && dash.IsBoosting())
         {
             acceleration.x += dashJumpBoost * ((currentOrientation == EntityOrientation.Right) ? 1 : -1);
         }
@@ -212,21 +218,35 @@ public class MainCharacter : KinematicBody2D
             wallJumpSnapTimer -= delta;
         }
         
-        if (jump) // TODO jump plus haut en restant
+        if (wallJump)
         {
             this.UpdateState(EntityState.Jumping);
-            acceleration.y += -jumpStrength;
-            jump = false;
             velocity.y = 0;
+            acceleration.y += -wallJumpVForce;
+            wallJump = false;
 
         }
-        else
-        {
+        
+        if (jump){
+            this.UpdateState(EntityState.Jumping);
+            velocity.y = 0;
+            acceleration.y += -jumpStrength;
+            jump = false;
+        }
+
+        if (!jump && !wallJump){
             if (noGravityTimer > 0){
                 noGravityTimer -= delta;
             } else {
                 acceleration.y += gravity;
+            }   
+        }
+
+        if (IsJumping()){
+            if (Input.IsActionPressed("activate_power") && CurrentMask.Type == MaskType.Jump){
+                acceleration.y += -jumpSecondaryStrength;
             }
+            jumpTimer -= delta;
         }
 
         velocity.y += acceleration.y;
@@ -325,20 +345,23 @@ public class MainCharacter : KinematicBody2D
         {
             if (this.IsOnFloor()){
                 jump = true;
+                jumpTimer = jumpDuration;
             }
 
             if (!this.IsOnFloor() && this.IsOnWall())
             {
                 // wall jump
                 Bump(new Vector2(-(int)snapDir * wallJumpForce, 0), wallJumpStunDuration);
-                jump = true;
+                wallJump = true;
+                velocity.y = 0;
             }
 
             if (!this.IsOnFloor() && !this.IsOnWall() && this.IsOnWallSnap())
             {
                 // wall jump
                 Bump(new Vector2(-(int)snapDir * wallJumpForce, 0), wallJumpStunDuration);
-                jump = true;
+                wallJump = true;
+                velocity.y = 0;
             }
 
             if (!this.IsOnFloor() && !this.IsOnWall() && !this.IsOnWallSnap() && jumpProj.Count > 0){
@@ -346,6 +369,7 @@ public class MainCharacter : KinematicBody2D
                 jumpProj[0].QueueFree();
                 jumpProj.RemoveAt(0);
                 jump = true;
+                jumpTimer = jumpDuration;
             }
 
             if (!jump){
@@ -396,6 +420,10 @@ public class MainCharacter : KinematicBody2D
 
     public bool IsOnWallSnap(){
         return wallJumpSnapTimer > 0;
+    }
+
+    public bool IsJumping(){
+        return jumpTimer > 0;
     }
     public void AddJumpProj(Proj proj){
         jumpProj.Add(proj);
