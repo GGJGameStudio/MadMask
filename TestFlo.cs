@@ -20,4 +20,10 @@ public class TestFlo : TileMap
             this.mainCharacter.Position = initialPosition;
         }
     }
+
+    public void _OnMainCharacterTeleportation()
+    {
+        GD.Print("Teleported !!");
+        this.mainCharacter.Position = this.initialPosition;
+    }
 }

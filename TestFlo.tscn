@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Masks/DashMask.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Masks/TimeMask.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Levels/TestFlo.cs" type="Script" id=7]
+[ext_resource path="res://TestFlo.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/Canon.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/FloatingSpike.tscn" type="PackedScene" id=10]
@@ -34,7 +34,7 @@ limit_bottom = 600
 [node name="Masks" type="Node" parent="."]
 
 [node name="Area2D" parent="Masks" instance=ExtResource( 4 )]
-position = Vector2( 290.669, 428.703 )
+position = Vector2( 284.941, 103.645 )
 
 [node name="Area2D2" parent="Masks" instance=ExtResource( 6 )]
 position = Vector2( 84.4729, 275.074 )
@@ -43,7 +43,7 @@ position = Vector2( 84.4729, 275.074 )
 position = Vector2( 512.173, 279.506 )
 
 [node name="Area2D4" parent="Masks" instance=ExtResource( 5 )]
-position = Vector2( 283.918, 88.9244 )
+position = Vector2( 1025.68, 285.105 )
 
 [node name="Canon" parent="." instance=ExtResource( 8 )]
 position = Vector2( 734.366, 424.619 )
@@ -66,9 +66,10 @@ position = Vector2( 71.0684, 94.2916 )
 position = Vector2( 511.513, 486.62 )
 
 [node name="Area2D3" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1832.85, -266.577 )
+position = Vector2( 286.319, 362.059 )
 
 [node name="RigidBody2D" parent="." instance=ExtResource( 13 )]
 position = Vector2( 1539.82, 161.442 )
+[connection signal="OnMainCharacterTeleportation" from="Area2D3" to="." method="_OnMainCharacterTeleportation"]
 
 [editable path="MainCharacter"]

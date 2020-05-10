@@ -66,7 +66,8 @@
     <Compile Include="Scenes\Shoot.cs" />
     <Compile Include="Scenes\Slow.cs" />
     <Compile Include="Scenes\Spike.cs" />
-    <Compile Include="Scenes\Levels\TestFlo.cs" />
+    <Compile Include="Scenes\Teleport.cs" />
+    <Compile Include="TestFlo.cs" />
     <Compile Include="Scenes\Slowable.cs" />
     <Compile Include="Utils\MaskType.cs" />
     <Compile Include="Utils\EntityState.cs" />
