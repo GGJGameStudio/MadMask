@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/floating_spike/idle2.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Spike.cs" type="Script" id=2]
+[ext_resource path="res://Assets/floating_spike/idle1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/floating_spike/idle3.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 40.0
+
+[node name="Spike" type="Area2D" groups=[
+"Spikes",
+]]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 2 )

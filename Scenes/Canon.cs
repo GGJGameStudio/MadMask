@@ -22,8 +22,7 @@ public class Canon : Node2D
     {
         this.orientation = orientation;
 
-        var animator = this.GetNode<AnimatedSprite>("AnimatedSprite");
-        animator.Scale = new Vector2((int)orientation * animator.Scale.x, animator.Scale.y);
+        this.GetNode<AnimatedSprite>("AnimatedSprite").Play(orientation == EntityOrientation.Left ? "left" : "right");
     }
 
     [Export]
