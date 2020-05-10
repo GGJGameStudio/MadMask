@@ -432,4 +432,8 @@ public class MainCharacter : KinematicBody2D
     public void RemoveJumpProj(Proj proj){
         jumpProj.Remove(proj);
     }
+
+    public void Restart(){
+        GetTree().ChangeScene("res://" + Game.currentLevel + ".tscn");
+    }
 }

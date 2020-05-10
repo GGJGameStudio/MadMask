@@ -69,6 +69,7 @@
     <Compile Include="Utils\MaskType.cs" />
     <Compile Include="Utils\EntityState.cs" />
     <Compile Include="Utils\EntityOrientation.cs" />
+    <Compile Include="Utils\Game.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
