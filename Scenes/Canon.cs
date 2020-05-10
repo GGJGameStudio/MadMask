@@ -27,7 +27,7 @@ public class Canon : Node2D
     }
 
     [Export]
-    public float rate = 2f;
+    public float rate = 1f;
 
     [Export]
     public float start = 1f;

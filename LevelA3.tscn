@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TileSets/TileSetA.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Canon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
+
+[node name="Map" type="TileMap"]
+position = Vector2( 49.4747, 2.93559 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 65535, 48, 0, 131071, 48, 0, 65562, 47, 0, 196607, 48, 0, 131098, 47, 0, 262143, 48, 0, 196634, 47, 0, 327679, 48, 0, 262170, 47, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327685, 37, 0, 327686, 37, 0, 327687, 37, 0, 327688, 37, 0, 327689, 37, 0, 327690, 37, 0, 327696, 41, 0, 327697, 41, 0, 327698, 44, 0, 327699, 44, 0, 327700, 44, 0, 327701, 44, 0, 327702, 44, 0, 327703, 44, 0, 327704, 44, 0, 327705, 44, 0, 393218, 48, 0, 393227, 50, 0, 393238, 46, 0, 458755, 44, 0, 458756, 44, 0, 458763, 50, 0, 458774, 47, 0, 524293, 44, 0, 524294, 44, 0, 524310, 47, 0, 589831, 44, 0, 589832, 44, 0, 589846, 47, 0, 655369, 44, 0, 655370, 44, 0, 655371, 44, 0, 655372, 43, 0, 655373, 43, 0, 655374, 43, 0, 655375, 43, 0, 655376, 43, 0, 655377, 43, 0, 655378, 43, 0, 655379, 43, 0, 655380, 43, 0, 655381, 43, 0 )
+
+[node name="Area2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 143.692, 284.475 )
+
+[node name="MainCharacter" parent="." instance=ExtResource( 1 )]
+position = Vector2( 50.0175, 282.426 )
+
+[node name="Canon" parent="." instance=ExtResource( 3 )]
+position = Vector2( 628.654, 285.266 )
+Orientation = 9223372036854775807
+rate = 0.5
+
+[node name="Canon2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 737.212, 343.423 )
+rate = 0.5

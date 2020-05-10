@@ -6,10 +6,10 @@
 [ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
 
 [node name="Map" type="TileMap"]
-position = Vector2( 12.2433, -1.36037 )
+position = Vector2( 49.4747, 2.93559 )
 tile_set = ExtResource( 2 )
 format = 1
-tile_data = PoolIntArray( 65535, 50, 0, 131071, 50, 0, 196607, 50, 0, 262143, 50, 0, 327679, 50, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 31, 0, 327684, 31, 0, 327685, 31, 0, 327686, 31, 0, 327687, 31, 0, 327688, 31, 0, 327689, 31, 0, 327690, 31, 0, 327691, 31, 0 )
+tile_data = PoolIntArray( 65535, 50, 0, 22, 45, 0, 131071, 50, 0, 65558, 45, 0, 196607, 50, 0, 131094, 45, 0, 262143, 50, 0, 196630, 45, 0, 327679, 50, 0, 262166, 45, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 31, 0, 327684, 31, 0, 327685, 31, 0, 327686, 35, 0, 327687, 35, 0, 327688, 35, 0, 327689, 35, 0, 327690, 35, 0, 327691, 35, 0, 327692, 35, 0, 327693, 35, 0, 327694, 35, 0, 327695, 35, 0, 327696, 35, 0, 327697, 35, 0, 327698, 35, 0, 327699, 35, 0, 327700, 35, 0, 327701, 35, 0 )
 
 [node name="Area2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 143.692, 284.475 )
@@ -28,3 +28,9 @@ position = Vector2( 682.67, 240.277 )
 
 [node name="Spike4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 717.046, 291.842 )
+
+[node name="Spike5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1101.52, 300.303 )
+
+[node name="Spike6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1100.09, 155.674 )

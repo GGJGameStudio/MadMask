@@ -6,7 +6,8 @@ public class CharacterHitbox : Area2D
     
     MainCharacter character;
 
-    private float bumpForce = 500f;
+    private float hbumpForce = 250f;
+    private float vbumpForce = 400f;
     private float bumpDuration = 0.3f;
 
     // Called when the node enters the scene tree for the first time.
@@ -25,7 +26,7 @@ public class CharacterHitbox : Area2D
             }
 
             if (area is Proj proj){
-                character.Bump(new Vector2((proj.IsDirectionRight() ? 1 : -1) * bumpForce,-bumpForce), bumpDuration);
+                character.Bump(new Vector2((proj.IsDirectionRight() ? 1 : -1) * hbumpForce,-vbumpForce), bumpDuration);
                 proj.QueueFree();
             }
         }

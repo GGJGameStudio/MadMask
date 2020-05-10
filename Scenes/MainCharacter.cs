@@ -27,7 +27,7 @@ public class MainCharacter : KinematicBody2D
     private float jumpDuration = 0.15f;
     private float dashJumpBoost = 250;
 
-    private float wallJumpForce = 400;
+    private float wallJumpForce = 500;
     private float wallJumpVForce = 650;
 
     private float wallJumpStunDuration = 0.25f;
@@ -37,13 +37,13 @@ public class MainCharacter : KinematicBody2D
 
     private EntityOrientation snapDir;
 
-    private float maximumVerticalVelocity = 400;
+    private float maximumVerticalVelocity = 350;
     private float horizontalVelocity = 0;
     private float horizontalDrag = 50;
 
     private float airHorizontalDrag = 15;
 
-    private float verticalWallDrag = 20f;
+    private float verticalWallDrag = 30f;
 
 
     private Vector2 acceleration;
@@ -395,6 +395,7 @@ public class MainCharacter : KinematicBody2D
 
     public void Bump(Vector2 force, float stunDuration)
     {
+        velocity = Vector2.Zero;
         acceleration += force;
         Stun(stunDuration);
     }

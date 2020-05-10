@@ -3,8 +3,8 @@ using System;
 
 public class Proj : Slowable
 {
-    private float baseSpeed = 200f;
-    private float boostSpeed = 300f;
+    private float baseSpeed = 150f;
+    private float boostSpeed = 250f;
 
     private float lifeTime = 2.5f;
 
@@ -45,5 +45,11 @@ public class Proj : Slowable
 
     public void SetBoosted(){
         boosted = true;
+    }
+
+    public void _on_body_entered(Node body){
+        if (body.GetType() == typeof(TileMap)){
+            QueueFree();
+        }
     }
 }
