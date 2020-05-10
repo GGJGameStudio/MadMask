@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Masks/DashMask.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Masks/TimeMask.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Test.cs" type="Script" id=7]
+[ext_resource path="res://Scenes/Levels/TestFlo.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/Canon.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=9]
 
