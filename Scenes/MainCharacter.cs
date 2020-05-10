@@ -75,6 +75,7 @@ public class MainCharacter : KinematicBody2D
 
         if (dash.IsDashing())
         {
+            (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = true;
             var dashVelocity = new Vector2();
             if (IsOnFloor())
             {
@@ -93,6 +94,7 @@ public class MainCharacter : KinematicBody2D
         }
         else
         {
+            (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = false;
             this.UpdatePowerState();
 
             this.UpdateVelocity(delta);

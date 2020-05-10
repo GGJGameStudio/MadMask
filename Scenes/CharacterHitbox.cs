@@ -20,15 +20,13 @@ public class CharacterHitbox : Area2D
 
     public void _onAreaEnter(Area2D area)
     {
-        if (!character.IsDashing()){
-            if (area is Spike){
-                character.Restart();
-            }
+        if (area is Spike){
+            character.Restart();
+        }
 
-            if (area is Proj proj){
-                character.Bump(new Vector2((proj.IsDirectionRight() ? 1 : -1) * hbumpForce,-vbumpForce), bumpDuration);
-                proj.QueueFree();
-            }
+        if (area is Proj proj){
+            character.Bump(new Vector2((proj.IsDirectionRight() ? 1 : -1) * hbumpForce,-vbumpForce), bumpDuration);
+            proj.QueueFree();
         }
     }
 }
