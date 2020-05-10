@@ -61,6 +61,7 @@
     <Compile Include="Scenes\Lobby.cs" />
     <Compile Include="Scenes\MainCharacter.cs" />
     <Compile Include="Scenes\Masks\Mask.cs" />
+    <Compile Include="Scenes\Platform.cs" />
     <Compile Include="Scenes\Proj.cs" />
     <Compile Include="Scenes\Shoot.cs" />
     <Compile Include="Scenes\Slow.cs" />

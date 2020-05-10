@@ -22,6 +22,9 @@ public class Slow : Area2D
         this.Connect("area_entered", this, nameof(_onSlowEnter));
         this.Connect("area_exited", this, nameof(_onSlowExit));
 
+        this.Connect("body_entered", this, nameof(_onSlowBodyEnter));
+        this.Connect("body_exited", this, nameof(_onSlowBodyExit));
+
         fx = GetNode<Sprite>("Sprite");
         fx.Visible = false;
 
@@ -61,6 +64,22 @@ public class Slow : Area2D
     public void _onSlowExit(Area2D area)
     {
         if (area is Slowable obj)
+        {
+            obj.SetSlow(false);
+        }
+    }
+
+    public void _onSlowBodyEnter(Node node)
+    {
+        if (active && node is Platform obj)
+        {
+            obj.SetSlow(true);
+        }
+    }
+
+    public void _onSlowBodyExit(Node node)
+    {
+        if (node is Platform obj)
         {
             obj.SetSlow(false);
         }

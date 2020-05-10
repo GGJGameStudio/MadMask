@@ -1,8 +1,12 @@
 using Godot;
 using System;
 
-public class Spike : Slowable
+public class Platform : KinematicBody2D
 {
+    protected bool slow = false;
+    
+    protected float speedSlow = 0.5f;
+
     [Export]
     public float moveDistanceX;
     [Export]
@@ -48,5 +52,11 @@ public class Spike : Slowable
 
             Position = startPosition.LinearInterpolate(moveTarget, timer / movePeriod);
         }
+    }
+
+    
+    public void SetSlow(bool slow)
+    {
+        this.slow = slow;
     }
 }
