@@ -73,6 +73,10 @@ public class MainCharacter : KinematicBody2D
     {
         this.UpdateMask();
 
+        if (IsStunned()){
+            stunTimer -= delta;
+        }
+
         if (dash.IsDashing())
         {
             (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = true;
@@ -115,36 +119,39 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdateMask()
     {
-        foreach (var mask in this.availableMasks)
-        {
-            if (this.CurrentMask != mask && Input.IsActionJustPressed(mask.AssociatedAction))
+        if (!IsStunned()){
+            foreach (var mask in this.availableMasks)
             {
-                this.ChangeMask(mask);
-
-                return;
-            }
-        }
-
-        if (this.availableMasks.Count > 0)
-        {
-            if (Input.IsActionJustPressed("wear_next_mask"))
-            {
-                var index = (this.availableMasks.IndexOf(this.CurrentMask) + 1) % this.availableMasks.Count;
-
-                this.ChangeMask(this.availableMasks[index]);
-            }
-            else if (Input.IsActionJustPressed("wear_previous_mask"))
-            {
-                var index = (this.availableMasks.IndexOf(this.CurrentMask) - 1) % this.availableMasks.Count;
-
-                if (index < 0)
+                if (this.CurrentMask != mask && Input.IsActionJustPressed(mask.AssociatedAction))
                 {
-                    index += this.availableMasks.Count;
-                }
+                    this.ChangeMask(mask);
 
-                this.ChangeMask(this.availableMasks[index]);
+                    return;
+                }
+            }
+
+            if (this.availableMasks.Count > 0)
+            {
+                if (Input.IsActionJustPressed("wear_next_mask"))
+                {
+                    var index = (this.availableMasks.IndexOf(this.CurrentMask) + 1) % this.availableMasks.Count;
+
+                    this.ChangeMask(this.availableMasks[index]);
+                }
+                else if (Input.IsActionJustPressed("wear_previous_mask"))
+                {
+                    var index = (this.availableMasks.IndexOf(this.CurrentMask) - 1) % this.availableMasks.Count;
+
+                    if (index < 0)
+                    {
+                        index += this.availableMasks.Count;
+                    }
+
+                    this.ChangeMask(this.availableMasks[index]);
+                }
             }
         }
+        
     }
 
     private void ChangeMask(Mask newMask)
@@ -164,11 +171,8 @@ public class MainCharacter : KinematicBody2D
 
         var horizontalSpeed = 0f;
 
-        if (IsStunned())
-        {
-            stunTimer -= delta;
-        }
-        else
+        
+        if (!IsStunned())
         {
             horizontalSpeed -= Input.GetActionStrength("character_move_left") * speed;
             horizontalSpeed += Input.GetActionStrength("character_move_right") * speed;
