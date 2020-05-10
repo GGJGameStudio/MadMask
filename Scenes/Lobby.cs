@@ -5,14 +5,13 @@ using SystemPath = System.IO.Path;
 
 public class Lobby : Node
 {
-    private const string LevelDirectoryPath = "res://Scenes/Levels";
     private readonly List<string> levelList = new List<string>();
     private ItemList itemList;
 
     public override void _Ready()
     {
         var levelDirectory = new Directory();
-        levelDirectory.Open(LevelDirectoryPath);
+        levelDirectory.Open(Game.LevelDirectory);
         levelDirectory.ListDirBegin(true, true);
 
         this.itemList = this.GetNode<ItemList>("ItemList");
@@ -33,8 +32,10 @@ public class Lobby : Node
 
             GD.Print($"Discovered scene: {file}");
 
-            this.itemList.AddItem(SystemPath.GetFileNameWithoutExtension(file));
-            this.levelList.Add(file);
+            var fileName = SystemPath.GetFileNameWithoutExtension(file);
+
+            this.itemList.AddItem(fileName);
+            this.levelList.Add(fileName);
         }
 
         this.itemList.Select(0);
@@ -47,9 +48,9 @@ public class Lobby : Node
         {
             var selectedLevel = (string)this.levelList[this.itemList.GetSelectedItems()[0]];
 
-            var levelPath = SystemPath.Combine(LevelDirectoryPath, selectedLevel);
+            Game.CurrentLevel = selectedLevel;
 
-            this.GetTree().ChangeScene(levelPath);
+            this.GetTree().ChangeScene(Game.GetCurrentLevelFullPath());
         }
     }
 }
