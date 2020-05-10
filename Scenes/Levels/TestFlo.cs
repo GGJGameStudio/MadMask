@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Test : TileMap
+public class TestFlo : TileMap
 {
     private MainCharacter mainCharacter;
     private Vector2 initialPosition;
