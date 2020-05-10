@@ -77,7 +77,7 @@ public class MainCharacter : KinematicBody2D
         {
             (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = true;
             var dashVelocity = new Vector2();
-            if (IsOnFloor())
+            if (!dash.verticalDash)
             {
                 dashVelocity.x = (int)currentOrientation * dash.GetSpeed();
             }

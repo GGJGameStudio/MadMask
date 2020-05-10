@@ -13,6 +13,8 @@ public class Dash : Node2D
     private float dashBoostTime = 0.5f;
     private float dashBoostTimer;
 
+    public bool verticalDash;
+
     MainCharacter character;
     AnimatedSprite characterSprite;
 
@@ -62,6 +64,11 @@ public class Dash : Node2D
             cooldownTimer = cooldown;
             character.Stun(duration);
             dashBoostTimer = dashBoostTime;
+            if (character.IsOnFloor()){
+                verticalDash = false;
+            } else {
+                verticalDash = true;
+            }
         }
     }
 
