@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TileSets/TileSetA.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Masks/DashMask.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=5]
+
+[node name="Map" type="TileMap"]
+position = Vector2( 49.4747, 2.93559 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 65535, 48, 0, 131071, 48, 0, 65557, 47, 0, 196607, 48, 0, 131093, 47, 0, 262143, 48, 0, 196629, 47, 0, 327679, 48, 0, 262165, 47, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 43, 0, 327684, 19, 0, 327688, 12, 0, 327689, 41, 0, 327690, 30, 0, 327691, 19, 0, 327696, 12, 0, 327697, 42, 0, 327698, 33, 0, 327699, 33, 0, 327700, 33, 0, 393220, 48, 0, 393224, 47, 0, 393227, 48, 0, 393232, 46, 0, 458757, 43, 0, 458758, 43, 0, 458759, 43, 0, 458764, 43, 0, 458765, 43, 0, 458766, 43, 0, 458767, 43, 0 )
+
+[node name="MainCharacter" parent="." instance=ExtResource( 1 )]
+position = Vector2( 50.0175, 282.426 )
+
+[node name="Spike" parent="." instance=ExtResource( 3 )]
+position = Vector2( 355.093, 405.077 )
+
+[node name="Spike2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 420.356, 409.368 )
+
+[node name="Spike3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 478.181, 409.599 )
+
+[node name="Spike4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 808.546, 405.109 )
+
+[node name="Spike5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 864.317, 406.617 )
+
+[node name="Spike6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 944.206, 403.602 )
+
+[node name="Spike7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 990.934, 411.139 )
+
+[node name="DashMask" parent="." instance=ExtResource( 4 )]
+position = Vector2( 602.04, 286.03 )
+
+[node name="TimeMask" parent="." instance=ExtResource( 5 )]
+position = Vector2( 238.771, 287.537 )

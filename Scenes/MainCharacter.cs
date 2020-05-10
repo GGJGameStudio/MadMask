@@ -182,7 +182,7 @@ public class MainCharacter : KinematicBody2D
             this.UpdateOrientation(horizontalSpeed > 0 ? EntityOrientation.Right : EntityOrientation.Left);
         }
 
-        if (IsJumping() && dash.IsBoosting())
+        if (jump && dash.IsBoosting())
         {
             acceleration.x += dashJumpBoost * ((currentOrientation == EntityOrientation.Right) ? 1 : -1);
         }

@@ -2,7 +2,7 @@ using System;
 
 public static class Game
 {
-    public static string CurrentLevel = "LevelA1";
+    public static string CurrentLevel = "LevelAB1";
 
     public static readonly string LevelDirectory = $"res://Scenes/Levels";
 
