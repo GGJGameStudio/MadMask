@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TileSets/TileSetA.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
+
+[node name="Map" type="TileMap"]
+position = Vector2( 12.2433, -1.36037 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 65535, 50, 0, 131071, 50, 0, 196607, 50, 0, 262143, 50, 0, 327679, 50, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 31, 0, 327684, 31, 0, 327685, 31, 0, 327686, 31, 0, 327687, 31, 0, 327688, 31, 0, 327689, 31, 0, 327690, 31, 0, 327691, 31, 0 )
+
+[node name="Area2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 143.692, 284.475 )
+
+[node name="MainCharacter" parent="." instance=ExtResource( 1 )]
+position = Vector2( 50.0175, 282.426 )
+
+[node name="Spike" parent="." instance=ExtResource( 3 )]
+position = Vector2( 308.209, 283.247 )
+
+[node name="Spike2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 643.382, 289.386 )
+
+[node name="Spike3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 682.67, 240.277 )
+
+[node name="Spike4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 717.046, 291.842 )

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Proj : Area2D
+public class Proj : Slowable
 {
     private float baseSpeed = 200f;
     private float boostSpeed = 300f;
@@ -10,13 +10,10 @@ public class Proj : Area2D
 
     private float speed;
 
-    private bool slow = false;
 
     private bool boosted;
 
     private float timer;
-
-    private float speedSlow = 0.5f;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -40,11 +37,6 @@ public class Proj : Area2D
         if (timer <= 0){
             QueueFree();
         }
-    }
-
-    public void SetSlow(bool slow)
-    {
-        this.slow = slow;
     }
 
     public bool IsDirectionRight(){

@@ -7,25 +7,35 @@ public class MainCharacter : KinematicBody2D
     private readonly Vector2 UpDirection = new Vector2(0, -1);
 
     private Vector2 velocity = new Vector2();
+
+    private Vector2 finalVelocity;
     private EntityState currentState = EntityState.Idle;
     private EntityOrientation currentOrientation = EntityOrientation.Right;
-
-    private bool jump;
 
     [Export]
     public int speed = 200;
     [Export]
     public int gravity = 30;
-    [Export]
-    public int jumpStrength = 600;
+
+    public int jumpStrength = 300;
+    public int jumpSecondaryStrength = 60;
+
+    private bool jump;
+    private bool wallJump;
+    private float jumpTimer;
+
+    private float jumpDuration = 0.15f;
     private float dashJumpBoost = 250;
 
-    private float wallJumpForce = 500;
+    private float wallJumpForce = 400;
+    private float wallJumpVForce = 650;
 
     private float wallJumpStunDuration = 0.25f;
 
     private float wallJumpSnapDuration = 0.2f;
     private float wallJumpSnapTimer;
+
+    private EntityOrientation snapDir;
 
     private float maximumVerticalVelocity = 400;
     private float horizontalVelocity = 0;
@@ -79,7 +89,7 @@ public class MainCharacter : KinematicBody2D
             horizontalVelocity = dashVelocity.x;
             velocity.y = dashVelocity.y;
 
-            this.MoveAndSlide(dashVelocity, UpDirection);
+            finalVelocity = this.MoveAndSlide(dashVelocity, UpDirection);
         }
         else
         {
@@ -87,7 +97,7 @@ public class MainCharacter : KinematicBody2D
 
             this.UpdateVelocity(delta);
 
-            this.MoveAndSlide(velocity, UpDirection);
+            finalVelocity = this.MoveAndSlide(velocity, UpDirection);
         }
 
         if (this.currentState == EntityState.Jumping && this.IsOnSomething())
@@ -146,6 +156,10 @@ public class MainCharacter : KinematicBody2D
     {
         #region horizontal velocity
 
+        if (IsOnWall() && finalVelocity.x == 0){
+            snapDir = currentOrientation;
+        }
+
         var horizontalSpeed = 0f;
 
         if (IsStunned())
@@ -168,7 +182,7 @@ public class MainCharacter : KinematicBody2D
             this.UpdateOrientation(horizontalSpeed > 0 ? EntityOrientation.Right : EntityOrientation.Left);
         }
 
-        if (jump && dash.IsBoosting())
+        if (IsJumping() && dash.IsBoosting())
         {
             acceleration.x += dashJumpBoost * ((currentOrientation == EntityOrientation.Right) ? 1 : -1);
         }
@@ -204,21 +218,35 @@ public class MainCharacter : KinematicBody2D
             wallJumpSnapTimer -= delta;
         }
         
-        if (jump) // TODO jump plus haut en restant
+        if (wallJump)
         {
             this.UpdateState(EntityState.Jumping);
-            acceleration.y += -jumpStrength;
-            jump = false;
             velocity.y = 0;
+            acceleration.y += -wallJumpVForce;
+            wallJump = false;
 
         }
-        else
-        {
+        
+        if (jump){
+            this.UpdateState(EntityState.Jumping);
+            velocity.y = 0;
+            acceleration.y += -jumpStrength;
+            jump = false;
+        }
+
+        if (!jump && !wallJump){
             if (noGravityTimer > 0){
                 noGravityTimer -= delta;
             } else {
                 acceleration.y += gravity;
+            }   
+        }
+
+        if (IsJumping()){
+            if (Input.IsActionPressed("activate_power") && CurrentMask.Type == MaskType.Jump){
+                acceleration.y += -jumpSecondaryStrength;
             }
+            jumpTimer -= delta;
         }
 
         velocity.y += acceleration.y;
@@ -279,7 +307,7 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdatePowerState()
     {
-        if (Input.IsActionJustPressed("activate_power"))
+        if (Input.IsActionJustPressed("activate_power") && !IsStunned())
         {
             switch (this.CurrentMask?.Type)
             {
@@ -315,24 +343,42 @@ public class MainCharacter : KinematicBody2D
     {
         if (this.IsOnSomething())
         {
-            jump = true;
+            if (this.IsOnFloor()){
+                jump = true;
+                jumpTimer = jumpDuration;
+            }
 
             if (!this.IsOnFloor() && this.IsOnWall())
             {
                 // wall jump
-                Bump(new Vector2(-(int)currentOrientation * wallJumpForce, 0), wallJumpStunDuration);
+                Bump(new Vector2(-(int)snapDir * wallJumpForce, 0), wallJumpStunDuration);
+                wallJump = true;
+                velocity.y = 0;
             }
 
             if (!this.IsOnFloor() && !this.IsOnWall() && this.IsOnWallSnap())
             {
                 // wall jump
-                Bump(new Vector2((int)currentOrientation * wallJumpForce, 0), wallJumpStunDuration);
+                Bump(new Vector2(-(int)snapDir * wallJumpForce, 0), wallJumpStunDuration);
+                wallJump = true;
+                velocity.y = 0;
             }
 
             if (!this.IsOnFloor() && !this.IsOnWall() && !this.IsOnWallSnap() && jumpProj.Count > 0){
                 // proj jump
                 jumpProj[0].QueueFree();
                 jumpProj.RemoveAt(0);
+                jump = true;
+                jumpTimer = jumpDuration;
+            }
+
+            if (!jump){
+                /*GD.Print("fail");
+                GD.Print("floor " + this.IsOnFloor());
+                GD.Print("wall " + this.IsOnWall());
+                GD.Print("snap " + this.IsOnWallSnap());
+                GD.Print("snapdir " + snapDir.ToString());
+                GD.Print("dir " + currentOrientation);*/
             }
         }
     }
@@ -375,11 +421,19 @@ public class MainCharacter : KinematicBody2D
     public bool IsOnWallSnap(){
         return wallJumpSnapTimer > 0;
     }
+
+    public bool IsJumping(){
+        return jumpTimer > 0;
+    }
     public void AddJumpProj(Proj proj){
         jumpProj.Add(proj);
     }
 
     public void RemoveJumpProj(Proj proj){
         jumpProj.Remove(proj);
+    }
+
+    public void Restart(){
+        GetTree().ChangeScene("res://" + Game.currentLevel + ".tscn");
     }
 }

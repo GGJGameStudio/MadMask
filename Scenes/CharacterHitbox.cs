@@ -21,7 +21,7 @@ public class CharacterHitbox : Area2D
     {
         if (!character.IsDashing()){
             if (area is Spike){
-                GD.Print("dead");
+                character.Restart();
             }
 
             if (area is Proj proj){
@@ -29,8 +29,5 @@ public class CharacterHitbox : Area2D
                 proj.QueueFree();
             }
         }
-        
-
-
     }
 }

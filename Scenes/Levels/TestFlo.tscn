@@ -21,7 +21,6 @@ __meta__ = {
 
 [node name="MainCharacter" parent="." instance=ExtResource( 1 )]
 position = Vector2( 15.4694, 283.546 )
-jumpStrength = 800
 
 [node name="Camera2D" parent="MainCharacter" index="7"]
 limit_left = 0
