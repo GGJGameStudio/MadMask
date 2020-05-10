@@ -7,6 +7,8 @@ public class MainCharacter : KinematicBody2D
     private readonly Vector2 UpDirection = new Vector2(0, -1);
 
     private Vector2 velocity = new Vector2();
+
+    private Vector2 finalVelocity;
     private EntityState currentState = EntityState.Idle;
     private EntityOrientation currentOrientation = EntityOrientation.Right;
 
@@ -26,6 +28,8 @@ public class MainCharacter : KinematicBody2D
 
     private float wallJumpSnapDuration = 0.2f;
     private float wallJumpSnapTimer;
+
+    private EntityOrientation snapDir;
 
     private float maximumVerticalVelocity = 400;
     private float horizontalVelocity = 0;
@@ -79,7 +83,7 @@ public class MainCharacter : KinematicBody2D
             horizontalVelocity = dashVelocity.x;
             velocity.y = dashVelocity.y;
 
-            this.MoveAndSlide(dashVelocity, UpDirection);
+            finalVelocity = this.MoveAndSlide(dashVelocity, UpDirection);
         }
         else
         {
@@ -87,7 +91,7 @@ public class MainCharacter : KinematicBody2D
 
             this.UpdateVelocity(delta);
 
-            this.MoveAndSlide(velocity, UpDirection);
+            finalVelocity = this.MoveAndSlide(velocity, UpDirection);
         }
 
         if (this.currentState == EntityState.Jumping && this.IsOnSomething())
@@ -146,6 +150,10 @@ public class MainCharacter : KinematicBody2D
     {
         #region horizontal velocity
 
+        if (IsOnWall() && finalVelocity.x == 0){
+            snapDir = currentOrientation;
+        }
+
         var horizontalSpeed = 0f;
 
         if (IsStunned())
@@ -202,7 +210,6 @@ public class MainCharacter : KinematicBody2D
             vdrag = verticalWallDrag;
         } else {
             wallJumpSnapTimer -= delta;
-            GD.Print(wallJumpSnapTimer);
         }
         
         if (jump) // TODO jump plus haut en restant
@@ -316,24 +323,38 @@ public class MainCharacter : KinematicBody2D
     {
         if (this.IsOnSomething())
         {
-            jump = true;
+            if (this.IsOnFloor()){
+                jump = true;
+            }
 
             if (!this.IsOnFloor() && this.IsOnWall())
             {
                 // wall jump
-                Bump(new Vector2(-(int)currentOrientation * wallJumpForce, 0), wallJumpStunDuration);
+                Bump(new Vector2(-(int)snapDir * wallJumpForce, 0), wallJumpStunDuration);
+                jump = true;
             }
 
             if (!this.IsOnFloor() && !this.IsOnWall() && this.IsOnWallSnap())
             {
                 // wall jump
-                Bump(new Vector2((int)currentOrientation * wallJumpForce, 0), wallJumpStunDuration);
+                Bump(new Vector2(-(int)snapDir * wallJumpForce, 0), wallJumpStunDuration);
+                jump = true;
             }
 
             if (!this.IsOnFloor() && !this.IsOnWall() && !this.IsOnWallSnap() && jumpProj.Count > 0){
                 // proj jump
                 jumpProj[0].QueueFree();
                 jumpProj.RemoveAt(0);
+                jump = true;
+            }
+
+            if (!jump){
+                /*GD.Print("fail");
+                GD.Print("floor " + this.IsOnFloor());
+                GD.Print("wall " + this.IsOnWall());
+                GD.Print("snap " + this.IsOnWallSnap());
+                GD.Print("snapdir " + snapDir.ToString());
+                GD.Print("dir " + currentOrientation);*/
             }
         }
     }
