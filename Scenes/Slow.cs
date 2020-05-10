@@ -52,17 +52,17 @@ public class Slow : Area2D
 
     public void _onSlowEnter(Area2D area)
     {
-        if (active && area is Proj proj)
+        if (active && area is Slowable obj)
         {
-            proj.SetSlow(true);
+            obj.SetSlow(true);
         }
     }
 
     public void _onSlowExit(Area2D area)
     {
-        if (area is Proj proj)
+        if (area is Slowable obj)
         {
-            proj.SetSlow(false);
+            obj.SetSlow(false);
         }
     }
 

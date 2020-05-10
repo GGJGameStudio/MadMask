@@ -202,6 +202,7 @@ public class MainCharacter : KinematicBody2D
             vdrag = verticalWallDrag;
         } else {
             wallJumpSnapTimer -= delta;
+            GD.Print(wallJumpSnapTimer);
         }
         
         if (jump) // TODO jump plus haut en restant
@@ -279,7 +280,7 @@ public class MainCharacter : KinematicBody2D
 
     private void UpdatePowerState()
     {
-        if (Input.IsActionJustPressed("activate_power"))
+        if (Input.IsActionJustPressed("activate_power") && !IsStunned())
         {
             switch (this.CurrentMask?.Type)
             {

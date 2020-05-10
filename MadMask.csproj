@@ -64,6 +64,7 @@
     <Compile Include="Scenes\Shoot.cs" />
     <Compile Include="Scenes\Slow.cs" />
     <Compile Include="Scenes\Spike.cs" />
+    <Compile Include="Scenes\Slowable.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Utils\MaskType.cs" />
     <Compile Include="Utils\EntityState.cs" />
