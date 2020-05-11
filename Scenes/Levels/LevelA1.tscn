@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/MainCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TileSets/TileSetA.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Teleport.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Masks/JumpMask.tscn" type="PackedScene" id=6]
 
 [node name="Map" type="TileMap"]
@@ -34,3 +35,6 @@ position = Vector2( 1101.52, 300.303 )
 
 [node name="Spike6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1100.09, 155.674 )
+
+[node name="Teleport" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1330.64, 232.997 )

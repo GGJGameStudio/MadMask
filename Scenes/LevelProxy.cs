@@ -10,6 +10,14 @@ public class LevelProxy : Node
         this.ConnectToTeleport(level);
     }
 
+    public override void _Process(float delta)
+    {
+        if (Input.IsActionPressed("ui_cancel"))
+        {
+            Game.GetBackToLobby(this.GetTree());
+        }
+    }
+
     private Node LoadLevel()
     {
         var levelFactory = GD.Load(Game.GetCurrentLevelPath()) as PackedScene;

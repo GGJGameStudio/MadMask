@@ -30,7 +30,7 @@ public static class Game
 
     public static void GetBackToLobby(SceneTree tree)
     {
-        tree.ChangeScene("res://Lobby.tscn");
+        tree.ChangeScene("res://Scenes/Lobby.tscn");
     }
 
     public static void ReloadCurrentLevel(SceneTree tree)

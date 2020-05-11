@@ -25,13 +25,14 @@ animations = [ {
 radius = 12.7425
 height = 24.8931
 
-[node name="Area2D" type="Area2D"]
+[node name="Teleport" type="Area2D"]
 script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "standBy"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
