@@ -8,6 +8,7 @@ public class LevelProxy : Node
         var level = this.LoadLevel();
 
         this.ConnectToTeleport(level);
+        this.SetBackgroundOnCamera(level);
     }
 
     public override void _Process(float delta)
@@ -38,6 +39,14 @@ public class LevelProxy : Node
         }
 
         teleport.Connect(nameof(Teleport.OnMainCharacterTeleportation), this, nameof(this.OnTeleportation));
+    }
+
+    private void SetBackgroundOnCamera(Node level)
+    {
+        var background = this.GetNode("Background");
+
+        this.RemoveChild(background);
+        level.GetNode("MainCharacter/Camera2D").AddChild(background);
     }
 
     private void OnTeleportation()
