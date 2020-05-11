@@ -442,6 +442,6 @@ public class MainCharacter : KinematicBody2D
 
     public void Restart()
     {
-        GetTree().ChangeScene(Game.GetCurrentLevelFullPath());
+        Game.ReloadCurrentLevel(this.GetTree());
     }
 }

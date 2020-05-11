@@ -48,9 +48,7 @@ public class Lobby : Node
         {
             var selectedLevel = (string)this.levelList[this.itemList.GetSelectedItems()[0]];
 
-            Game.CurrentLevel = selectedLevel;
-
-            this.GetTree().ChangeScene(Game.GetCurrentLevelFullPath());
+            Game.LoadLevel(this.GetTree(), selectedLevel);
         }
     }
 }

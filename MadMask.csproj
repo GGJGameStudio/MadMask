@@ -58,6 +58,7 @@
     <Compile Include="Scenes\CharacterHitbox.cs" />
     <Compile Include="Scenes\Dash.cs" />
     <Compile Include="Scenes\JumpProjArea.cs" />
+    <Compile Include="Scenes\LevelProxy.cs" />
     <Compile Include="Scenes\Lobby.cs" />
     <Compile Include="Scenes\MainCharacter.cs" />
     <Compile Include="Scenes\Masks\Mask.cs" />
