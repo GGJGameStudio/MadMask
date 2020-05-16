@@ -15,6 +15,8 @@ public class Dash : Node2D
 
     public bool verticalDash;
 
+    public EntityOrientation dashDir;
+
     MainCharacter character;
     AnimatedSprite characterSprite;
 
@@ -69,6 +71,7 @@ public class Dash : Node2D
             } else {
                 verticalDash = true;
             }
+            dashDir = character.GetOrientation();
         }
     }
 

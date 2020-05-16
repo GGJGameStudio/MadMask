@@ -25,7 +25,7 @@ public class MainCharacter : KinematicBody2D
     private float jumpTimer;
 
     private float jumpDuration = 0.15f;
-    private float dashJumpBoost = 250;
+    private float dashJumpBoost = 500;
 
     private float wallJumpForce = 500;
     private float wallJumpVForce = 650;
@@ -43,7 +43,8 @@ public class MainCharacter : KinematicBody2D
 
     private float airHorizontalDrag = 15;
 
-    private float verticalWallDrag = 30f;
+    private float verticalWallDrag = 20f;
+    private float maximumVerticalVelocityWall = 100f;
 
 
     private Vector2 acceleration;
@@ -190,7 +191,8 @@ public class MainCharacter : KinematicBody2D
 
         if (jump && dash.IsBoosting())
         {
-            acceleration.x += dashJumpBoost * ((currentOrientation == EntityOrientation.Right) ? 1 : -1);
+            acceleration.x += dashJumpBoost * ((dash.dashDir == EntityOrientation.Right) ? 1 : -1);
+            horizontalVelocity = 0;
         }
 
         horizontalVelocity += acceleration.x;
@@ -259,6 +261,10 @@ public class MainCharacter : KinematicBody2D
 
         if (velocity.y > 0) velocity.y -= Mathf.Min(vdrag, velocity.y);
         if (velocity.y > maximumVerticalVelocity) velocity.y = maximumVerticalVelocity;
+
+        if (IsOnWall()){
+            if (velocity.y > maximumVerticalVelocityWall) velocity.y = maximumVerticalVelocityWall;
+        }
 
         #endregion
 
@@ -443,5 +449,9 @@ public class MainCharacter : KinematicBody2D
     public void Restart()
     {
         Game.ReloadCurrentLevel(this.GetTree());
+    }
+
+    public EntityOrientation GetOrientation(){
+        return currentOrientation;
     }
 }
