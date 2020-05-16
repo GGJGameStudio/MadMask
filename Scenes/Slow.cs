@@ -8,8 +8,7 @@ public class Slow : Area2D
     private float slowTimer;
     private float cooldownTimer;
 
-    private float slowDuration = 3f;
-    private float slowCooldown = 3f;
+    private float slowDuration = 4f;
 
     private Sprite fx;
     private CollisionShape2D shape;
@@ -41,7 +40,6 @@ public class Slow : Area2D
             if (slowTimer <= 0)
             {
                 Stop();
-                cooldownTimer = slowTimer + slowCooldown;
             }
         }
 
@@ -100,12 +98,16 @@ public class Slow : Area2D
 
     public void Activate()
     {
-        if (IsSlowReady())
+        if (!active && IsSlowReady())
         {
             active = true;
             slowTimer = slowDuration;
             fx.Visible = true;
             shape.Disabled = false;
+        } else {
+            if (active){
+                Stop();
+            }     
         }
     }
 
@@ -114,5 +116,8 @@ public class Slow : Area2D
         active = false;
         fx.Visible = false;
         shape.Disabled = true;
+
+        cooldownTimer = slowDuration - slowTimer;
+        slowTimer = 0;
     }
 }
