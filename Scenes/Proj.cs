@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Proj : Slowable
+public class Proj : Area2D, Entity
 {
     private float baseSpeed = 150f;
     private float boostSpeed = 250f;
@@ -15,6 +15,8 @@ public class Proj : Slowable
 
     private float timer;
 
+    private Slowable Slowable;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -25,12 +27,14 @@ public class Proj : Slowable
         }
 
         timer = lifeTime;
+
+        Slowable = new Slowable();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        Position += new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * (slow ? speed * speedSlow : speed) * delta;
+        Position += new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * (Slowable.Slow ? speed * Slowable.SpeedSlow : speed) * delta;
 
         timer -= delta;
 
@@ -51,5 +55,13 @@ public class Proj : Slowable
         if (body.GetType() == typeof(TileMap)){
             QueueFree();
         }
+    }
+
+    public Movable GetMovable(){
+        return null;
+    }
+
+    public Slowable GetSlowable(){
+        return Slowable;
     }
 }

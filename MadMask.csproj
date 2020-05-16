@@ -70,6 +70,8 @@
     <Compile Include="Scenes\Teleport.cs" />
     <Compile Include="TestFlo.cs" />
     <Compile Include="Scenes\Slowable.cs" />
+    <Compile Include="Scenes\Movable.cs" />
+    <Compile Include="Scenes\Entity.cs" />
     <Compile Include="Utils\MaskType.cs" />
     <Compile Include="Utils\EntityState.cs" />
     <Compile Include="Utils\EntityOrientation.cs" />

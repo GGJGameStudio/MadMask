@@ -20,13 +20,21 @@ position = Vector2( 50.0175, 282.426 )
 
 [node name="Platform" parent="." instance=ExtResource( 3 )]
 position = Vector2( 523.248, 351 )
+
+[node name="Movable" parent="Platform" index="2"]
 moveDistanceX = 500.0
-moveSpeed = 120.0
+moveSpeed = 100.0
 
 [node name="Platform2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1007.18, 351 )
+
+[node name="Movable" parent="Platform2" index="2"]
 moveDistanceX = 500.0
-moveSpeed = 120.0
+moveSpeed = 100.0
 
 [node name="Teleport" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1773.56, 298.614 )
+
+[editable path="Platform"]
+
+[editable path="Platform2"]

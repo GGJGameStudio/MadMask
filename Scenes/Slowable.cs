@@ -1,14 +1,13 @@
 using Godot;
 using System;
 
-public abstract class Slowable : Area2D {
+public class Slowable {
     
-    protected bool slow = false;
+    public bool Slow {get; set;}
     
-    protected float speedSlow = 0.5f;
+    public float SpeedSlow {get; set;} 
     
-    public void SetSlow(bool slow)
-    {
-        this.slow = slow;
+    public Slowable(){
+        SpeedSlow = 0.5f;
     }
 }

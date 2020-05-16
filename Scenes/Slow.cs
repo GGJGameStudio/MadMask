@@ -19,8 +19,8 @@ public class Slow : Area2D
     {
         active = false;
 
-        this.Connect("area_entered", this, nameof(_onSlowEnter));
-        this.Connect("area_exited", this, nameof(_onSlowExit));
+        this.Connect("area_entered", this, nameof(_onSlowAreaEnter));
+        this.Connect("area_exited", this, nameof(_onSlowAreaExit));
 
         this.Connect("body_entered", this, nameof(_onSlowBodyEnter));
         this.Connect("body_exited", this, nameof(_onSlowBodyExit));
@@ -53,35 +53,43 @@ public class Slow : Area2D
     }
 
 
-    public void _onSlowEnter(Area2D area)
+    public void _onSlowAreaEnter(Area2D area)
     {
-        if (active && area is Slowable obj)
+        if (active && area is Entity obj)
         {
-            obj.SetSlow(true);
+            if (obj.GetSlowable() != null){
+                obj.GetSlowable().Slow = true;
+            }
         }
     }
 
-    public void _onSlowExit(Area2D area)
+    public void _onSlowAreaExit(Area2D area)
     {
-        if (area is Slowable obj)
+        if (area is Entity obj)
         {
-            obj.SetSlow(false);
+            if (obj.GetSlowable() != null){
+                obj.GetSlowable().Slow = false;
+            }
         }
     }
 
     public void _onSlowBodyEnter(Node node)
     {
-        if (active && node is Platform obj)
+        if (active && node is Entity obj)
         {
-            obj.SetSlow(true);
+            if (obj.GetSlowable() != null){
+                obj.GetSlowable().Slow = true;
+            }
         }
     }
 
     public void _onSlowBodyExit(Node node)
     {
-        if (node is Platform obj)
+        if (node is Entity obj)
         {
-            obj.SetSlow(false);
+            if (obj.GetSlowable() != null){
+                obj.GetSlowable().Slow = false;
+            }
         }
     }
 
