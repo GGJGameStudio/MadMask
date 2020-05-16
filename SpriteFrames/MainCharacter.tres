@@ -1,25 +1,35 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=2]
+[gd_resource type="SpriteFrames" load_steps=11 format=2]
 
 [ext_resource path="res://Assets/main_character/run/walk2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/main_character/idle/idle1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/main_character/run/walk4.png" type="Texture" id=3]
 [ext_resource path="res://Assets/main_character/run/walk3.png" type="Texture" id=4]
 [ext_resource path="res://Assets/main_character/run/walk1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/main_character/jump/bluefalling1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/main_character/idle/bluestatic2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/main_character/jump/bluefalling3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/main_character/jump/bluefalling2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/main_character/wall/bluewall.png" type="Texture" id=10]
 
 [resource]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "idle",
-"speed": 1.0
+"speed": 4.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "jump",
-"speed": 1.0
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "run",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "wall",
+"speed": 1.0
 } ]

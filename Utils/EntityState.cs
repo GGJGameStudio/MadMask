@@ -2,5 +2,6 @@ public enum EntityState
 {
     Idle,
     Running,
-    Jumping
+    Jumping,
+    Wall
 }

@@ -264,6 +264,7 @@ public class MainCharacter : KinematicBody2D
 
         if (IsOnWall()){
             if (velocity.y > maximumVerticalVelocityWall) velocity.y = maximumVerticalVelocityWall;
+            this.UpdateState(EntityState.Wall);
         }
 
         #endregion
@@ -294,6 +295,9 @@ public class MainCharacter : KinematicBody2D
                         break;
                     case EntityState.Running:
                         animator.Play("run");
+                        break;
+                    case EntityState.Wall:
+                        animator.Play("wall");
                         break;
                 }
             }
