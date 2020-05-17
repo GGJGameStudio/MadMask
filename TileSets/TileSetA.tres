@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=64 format=2]
+[gd_resource type="TileSet" load_steps=80 format=2]
 
 [ext_resource path="res://Assets/TilesSetA.png" type="Texture" id=1]
 
@@ -182,7 +182,55 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [sub_resource type="ConvexPolygonShape2D" id=60]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
+[sub_resource type="ConvexPolygonShape2D" id=63]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=64]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=65]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=66]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=67]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=68]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=69]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=70]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
 [sub_resource type="ConvexPolygonShape2D" id=61]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=71]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=72]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=73]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=74]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=75]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=76]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=77]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=78]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=62]
@@ -1641,9 +1689,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 72/navigation_offset = Vector2( 0, 0 )
 72/shape_offset = Vector2( 0, 0 )
 72/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+72/shape = SubResource( 63 )
 72/shape_one_way = false
-72/shape_one_way_margin = 0.0
-72/shapes = [  ]
+72/shape_one_way_margin = 1.0
+72/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 63 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 72/z_index = 0
 73/name = "TilesSetA.png 73"
 73/texture = ExtResource( 1 )
@@ -1655,9 +1710,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 73/navigation_offset = Vector2( 0, 0 )
 73/shape_offset = Vector2( 0, 0 )
 73/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+73/shape = SubResource( 64 )
 73/shape_one_way = false
-73/shape_one_way_margin = 0.0
-73/shapes = [  ]
+73/shape_one_way_margin = 1.0
+73/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 64 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 73/z_index = 0
 74/name = "TilesSetA.png 74"
 74/texture = ExtResource( 1 )
@@ -1669,9 +1731,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 74/navigation_offset = Vector2( 0, 0 )
 74/shape_offset = Vector2( 0, 0 )
 74/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+74/shape = SubResource( 65 )
 74/shape_one_way = false
-74/shape_one_way_margin = 0.0
-74/shapes = [  ]
+74/shape_one_way_margin = 1.0
+74/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 65 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 74/z_index = 0
 75/name = "TilesSetA.png 75"
 75/texture = ExtResource( 1 )
@@ -1683,9 +1752,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 75/navigation_offset = Vector2( 0, 0 )
 75/shape_offset = Vector2( 0, 0 )
 75/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+75/shape = SubResource( 66 )
 75/shape_one_way = false
-75/shape_one_way_margin = 0.0
-75/shapes = [  ]
+75/shape_one_way_margin = 1.0
+75/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 66 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 75/z_index = 0
 76/name = "TilesSetA.png 76"
 76/texture = ExtResource( 1 )
@@ -1697,9 +1773,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 76/navigation_offset = Vector2( 0, 0 )
 76/shape_offset = Vector2( 0, 0 )
 76/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+76/shape = SubResource( 67 )
 76/shape_one_way = false
-76/shape_one_way_margin = 0.0
-76/shapes = [  ]
+76/shape_one_way_margin = 1.0
+76/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 67 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 76/z_index = 0
 77/name = "TilesSetA.png 77"
 77/texture = ExtResource( 1 )
@@ -1711,9 +1794,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 77/navigation_offset = Vector2( 0, 0 )
 77/shape_offset = Vector2( 0, 0 )
 77/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+77/shape = SubResource( 68 )
 77/shape_one_way = false
-77/shape_one_way_margin = 0.0
-77/shapes = [  ]
+77/shape_one_way_margin = 1.0
+77/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 68 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 77/z_index = 0
 78/name = "TilesSetA.png 78"
 78/texture = ExtResource( 1 )
@@ -1725,9 +1815,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 78/navigation_offset = Vector2( 0, 0 )
 78/shape_offset = Vector2( 0, 0 )
 78/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+78/shape = SubResource( 69 )
 78/shape_one_way = false
-78/shape_one_way_margin = 0.0
-78/shapes = [  ]
+78/shape_one_way_margin = 1.0
+78/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 69 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 78/z_index = 0
 79/name = "TilesSetA.png 79"
 79/texture = ExtResource( 1 )
@@ -1739,9 +1836,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 79/navigation_offset = Vector2( 0, 0 )
 79/shape_offset = Vector2( 0, 0 )
 79/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+79/shape = SubResource( 70 )
 79/shape_one_way = false
-79/shape_one_way_margin = 0.0
-79/shapes = [  ]
+79/shape_one_way_margin = 1.0
+79/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 70 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 79/z_index = 0
 80/name = "TilesSetA.png 80"
 80/texture = ExtResource( 1 )
@@ -1753,9 +1857,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 80/navigation_offset = Vector2( 0, 0 )
 80/shape_offset = Vector2( 0, 0 )
 80/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+80/shape = SubResource( 71 )
 80/shape_one_way = false
-80/shape_one_way_margin = 0.0
-80/shapes = [  ]
+80/shape_one_way_margin = 1.0
+80/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 71 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 80/z_index = 0
 81/name = "TilesSetA.png 81"
 81/texture = ExtResource( 1 )
@@ -1767,9 +1878,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 81/navigation_offset = Vector2( 0, 0 )
 81/shape_offset = Vector2( 0, 0 )
 81/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+81/shape = SubResource( 72 )
 81/shape_one_way = false
-81/shape_one_way_margin = 0.0
-81/shapes = [  ]
+81/shape_one_way_margin = 1.0
+81/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 72 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 81/z_index = 0
 82/name = "TilesSetA.png 82"
 82/texture = ExtResource( 1 )
@@ -1781,9 +1899,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 82/navigation_offset = Vector2( 0, 0 )
 82/shape_offset = Vector2( 0, 0 )
 82/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+82/shape = SubResource( 73 )
 82/shape_one_way = false
-82/shape_one_way_margin = 0.0
-82/shapes = [  ]
+82/shape_one_way_margin = 1.0
+82/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 73 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 82/z_index = 0
 83/name = "TilesSetA.png 83"
 83/texture = ExtResource( 1 )
@@ -1795,9 +1920,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 83/navigation_offset = Vector2( 0, 0 )
 83/shape_offset = Vector2( 0, 0 )
 83/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+83/shape = SubResource( 74 )
 83/shape_one_way = false
-83/shape_one_way_margin = 0.0
-83/shapes = [  ]
+83/shape_one_way_margin = 1.0
+83/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 74 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 83/z_index = 0
 84/name = "TilesSetA.png 84"
 84/texture = ExtResource( 1 )
@@ -1809,9 +1941,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 84/navigation_offset = Vector2( 0, 0 )
 84/shape_offset = Vector2( 0, 0 )
 84/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+84/shape = SubResource( 75 )
 84/shape_one_way = false
-84/shape_one_way_margin = 0.0
-84/shapes = [  ]
+84/shape_one_way_margin = 1.0
+84/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 75 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 84/z_index = 0
 85/name = "TilesSetA.png 85"
 85/texture = ExtResource( 1 )
@@ -1823,9 +1962,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 85/navigation_offset = Vector2( 0, 0 )
 85/shape_offset = Vector2( 0, 0 )
 85/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+85/shape = SubResource( 76 )
 85/shape_one_way = false
-85/shape_one_way_margin = 0.0
-85/shapes = [  ]
+85/shape_one_way_margin = 1.0
+85/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 76 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 85/z_index = 0
 86/name = "TilesSetA.png 86"
 86/texture = ExtResource( 1 )
@@ -1837,9 +1983,16 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 86/navigation_offset = Vector2( 0, 0 )
 86/shape_offset = Vector2( 0, 0 )
 86/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+86/shape = SubResource( 77 )
 86/shape_one_way = false
-86/shape_one_way_margin = 0.0
-86/shapes = [  ]
+86/shape_one_way_margin = 1.0
+86/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 77 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 86/z_index = 0
 87/name = "TilesSetA.png 87"
 87/texture = ExtResource( 1 )
@@ -1851,7 +2004,14 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 87/navigation_offset = Vector2( 0, 0 )
 87/shape_offset = Vector2( 0, 0 )
 87/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+87/shape = SubResource( 78 )
 87/shape_one_way = false
-87/shape_one_way_margin = 0.0
-87/shapes = [  ]
+87/shape_one_way_margin = 1.0
+87/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 78 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 87/z_index = 0
