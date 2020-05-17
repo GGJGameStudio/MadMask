@@ -28,4 +28,4 @@ position = Vector2( 711.436, 353.447 )
 rate = 0.5
 
 [node name="Teleport" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1586.96, 232.997 )
+position = Vector2( 1589.82, 234.429 )

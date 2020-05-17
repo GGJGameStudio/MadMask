@@ -28,7 +28,7 @@ position = Vector2( 701.009, 740.657 )
 position = Vector2( 294.229, 99.1794 )
 
 [node name="AnimatedSprite" parent="Spike7" index="0"]
-frame = 1
+frame = 0
 
 [node name="Movable" parent="Spike7" index="2"]
 moveDistanceY = -120.0
@@ -36,9 +36,6 @@ moveSpeed = 350.0
 
 [node name="Spike18" parent="." instance=ExtResource( 7 )]
 position = Vector2( 735.508, 99.1794 )
-
-[node name="AnimatedSprite" parent="Spike18" index="0"]
-frame = 0
 
 [node name="Movable" parent="Spike18" index="2"]
 moveDistanceY = -120.0
