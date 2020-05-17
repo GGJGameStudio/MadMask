@@ -8,6 +8,6 @@ public class Slowable {
     public float SpeedSlow {get; set;} 
     
     public Slowable(){
-        SpeedSlow = 0.5f;
+        SpeedSlow = 0.35f;
     }
 }

@@ -7,7 +7,7 @@ public static class Game
 
     public static readonly string LevelDirectory = $"res://Scenes/Levels";
 
-    public static string CurrentLevel { get; private set; } = "LevelAB3";
+    public static string CurrentLevel { get; private set; } = "LevelX1";
 
     public static string GetLevelFullPath(string levelName)
     {

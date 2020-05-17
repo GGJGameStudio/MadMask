@@ -3,8 +3,8 @@ using System;
 
 public class Proj : Area2D, Entity
 {
-    private float baseSpeed = 150f;
-    private float boostSpeed = 250f;
+    private float baseSpeed = 210f;
+    private float boostSpeed = 320f;
 
     private float lifeTime = 2.5f;
 
