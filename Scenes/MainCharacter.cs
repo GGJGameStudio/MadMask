@@ -61,6 +61,10 @@ public class MainCharacter : KinematicBody2D
 
     private List<Proj> jumpProj;
 
+    private float freezeTimer;
+
+    private float freezeTime = 0.0f;
+
 
     public override void _Ready()
     {
@@ -72,44 +76,51 @@ public class MainCharacter : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        this.UpdateMask();
+        if (Freeze.Frozen){
+            freezeTimer -= delta;
+            if (freezeTimer <= 0){
+                Freeze.Frozen = false;
+            }
+        } else {
+            this.UpdateMask();
 
-        if (IsStunned()){
-            stunTimer -= delta;
-        }
+            if (IsStunned()){
+                stunTimer -= delta;
+            }
 
-        if (dash.IsDashing())
-        {
-            (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = true;
-            var dashVelocity = new Vector2();
-            if (!dash.verticalDash)
+            if (dash.IsDashing())
             {
-                dashVelocity.x = (int)currentOrientation * dash.GetSpeed();
+                (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = true;
+                var dashVelocity = new Vector2();
+                if (!dash.verticalDash)
+                {
+                    dashVelocity.x = (int)currentOrientation * dash.GetSpeed();
+                }
+                else
+                {
+                    dashVelocity.x = (int)currentOrientation * dash.GetSpeed() * 0.4f;
+                    dashVelocity.y = dash.GetSpeed();
+                }
+
+                horizontalVelocity = dashVelocity.x;
+                velocity.y = dashVelocity.y;
+
+                finalVelocity = this.MoveAndSlide(dashVelocity, UpDirection);
             }
             else
             {
-                dashVelocity.x = (int)currentOrientation * dash.GetSpeed() * 0.4f;
-                dashVelocity.y = dash.GetSpeed();
+                (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = false;
+                this.UpdatePowerState();
+
+                this.UpdateVelocity(delta);
+
+                finalVelocity = this.MoveAndSlide(velocity, UpDirection);
             }
 
-            horizontalVelocity = dashVelocity.x;
-            velocity.y = dashVelocity.y;
-
-            finalVelocity = this.MoveAndSlide(dashVelocity, UpDirection);
-        }
-        else
-        {
-            (GetNode("Hitbox").GetNode("CollisionShape2D") as CollisionShape2D).Disabled = false;
-            this.UpdatePowerState();
-
-            this.UpdateVelocity(delta);
-
-            finalVelocity = this.MoveAndSlide(velocity, UpDirection);
-        }
-
-        if (this.currentState == EntityState.Jumping && this.IsOnSomething())
-        {
-            this.UpdateState(EntityState.Idle);
+            if (this.currentState == EntityState.Jumping && this.IsOnSomething())
+            {
+                this.UpdateState(EntityState.Idle);
+            }
         }
     }
 
@@ -160,6 +171,8 @@ public class MainCharacter : KinematicBody2D
         this.CurrentMask?.ChangeState(false);
         this.CurrentMask = newMask;
         this.CurrentMask.ChangeState(true);
+        Freeze.Frozen = true;
+        freezeTimer = freezeTime;
     }
 
     private void UpdateVelocity(float delta)

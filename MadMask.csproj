@@ -76,6 +76,7 @@
     <Compile Include="Utils\EntityState.cs" />
     <Compile Include="Utils\EntityOrientation.cs" />
     <Compile Include="Utils\Game.cs" />
+    <Compile Include="Utils\Freeze.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,12 +34,14 @@ public class Proj : Area2D, Entity
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        Position += new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * (Slowable.Slow ? speed * Slowable.SpeedSlow : speed) * delta;
+        if (!Freeze.Frozen){
+            Position += new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * (Slowable.Slow ? speed * Slowable.SpeedSlow : speed) * delta;
 
-        timer -= delta;
+            timer -= delta;
 
-        if (timer <= 0){
-            QueueFree();
+            if (timer <= 0){
+                QueueFree();
+            }
         }
     }
 

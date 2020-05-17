@@ -39,30 +39,33 @@ public class Movable : Node2D {
 
     public override void _Process(float delta)
     {
-        if (startTimer > 0){
-            startTimer -= delta;
-        } else {
-            if (moveSpeed > 0){
-                var moveTarget = new Vector2(moveDistanceX, moveDistanceY) + startPosition;
-                var moveDistance = moveTarget.DistanceTo(startPosition);
-                var movePeriod = moveDistance / moveSpeed;
-                
-                if (!comebackPhase){
-                    timer += (Slowable.Slow ? delta * Slowable.SpeedSlow : delta);
-                    if (timer >= movePeriod){
-                        timer = movePeriod;
-                        comebackPhase = true;
+        if (!Freeze.Frozen){
+            if (startTimer > 0){
+                startTimer -= delta;
+            } else {
+                if (moveSpeed > 0){
+                    var moveTarget = new Vector2(moveDistanceX, moveDistanceY) + startPosition;
+                    var moveDistance = moveTarget.DistanceTo(startPosition);
+                    var movePeriod = moveDistance / moveSpeed;
+                    
+                    if (!comebackPhase){
+                        timer += (Slowable.Slow ? delta * Slowable.SpeedSlow : delta);
+                        if (timer >= movePeriod){
+                            timer = movePeriod;
+                            comebackPhase = true;
+                        }
+                    } else {
+                        timer -= (Slowable.Slow ? delta * Slowable.SpeedSlow : delta);
+                        if (timer <= 0){
+                            timer = 0;
+                            comebackPhase = false;
+                        }   
                     }
-                } else {
-                    timer -= (Slowable.Slow ? delta * Slowable.SpeedSlow : delta);
-                    if (timer <= 0){
-                        timer = 0;
-                        comebackPhase = false;
-                    }   
-                }
 
-                entity.GlobalPosition = startPosition.LinearInterpolate(moveTarget, timer / movePeriod);
+                    entity.GlobalPosition = startPosition.LinearInterpolate(moveTarget, timer / movePeriod);
+                }
             }
         }
+        
     }
 }
