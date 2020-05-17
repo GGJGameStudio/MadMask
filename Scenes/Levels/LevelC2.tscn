@@ -10,7 +10,7 @@
 position = Vector2( 122.505, 40.1669 )
 tile_set = ExtResource( 2 )
 format = 1
-tile_data = PoolIntArray( -65516, 47, 0, 65535, 50, 0, 20, 47, 0, 131071, 50, 0, 65556, 47, 0, 196607, 50, 0, 131092, 47, 0, 262143, 50, 0, 196628, 47, 0, 327679, 50, 0, 262164, 47, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 31, 0, 327684, 31, 0, 327685, 31, 0, 327686, 33, 0, 327687, 33, 0, 327688, 33, 0, 327689, 33, 0, 327690, 33, 0, 327691, 33, 0, 327692, 33, 0, 327693, 33, 0, 327694, 33, 0, 327695, 33, 0, 327696, 33, 0, 327697, 33, 0, 327698, 33, 0, 327699, 33, 0 )
+tile_data = PoolIntArray( -1, 75, 0, -65536, 51, 0, -65535, 51, 0, -65534, 52, 0, -65533, 52, 0, -65532, 51, 0, -65531, 51, 0, -65530, 52, 0, -65529, 51, 0, -65528, 51, 0, -65527, 52, 0, -65526, 52, 0, -65525, 52, 0, -65524, 52, 0, -65523, 53, 0, -65522, 53, 0, -65521, 52, 0, -65520, 52, 0, -65519, 53, 0, -65518, 53, 0, -65517, 53, 0, -65516, 74, 0, 65535, 50, 0, 20, 47, 0, 131071, 50, 0, 65556, 47, 0, 196607, 50, 0, 131092, 47, 0, 262143, 50, 0, 196628, 47, 0, 327679, 50, 0, 262164, 47, 0, 393215, 72, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 31, 0, 327684, 31, 0, 327685, 31, 0, 327686, 33, 0, 327687, 33, 0, 327688, 33, 0, 327689, 33, 0, 327690, 33, 0, 327691, 33, 0, 327692, 33, 0, 327693, 33, 0, 327694, 33, 0, 327695, 33, 0, 327696, 33, 0, 327697, 33, 0, 327698, 33, 0, 327699, 33, 0, 327700, 73, 0 )
 
 [node name="Area2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 629.617, 277.887 )
@@ -24,9 +24,6 @@ position = Vector2( 1216.25, 233.565 )
 [node name="Spike" parent="." instance=ExtResource( 3 )]
 position = Vector2( 503.252, 266.694 )
 
-[node name="AnimatedSprite" parent="Spike" index="0"]
-frame = 1
-
 [node name="Movable" parent="Spike" index="2"]
 moveDistanceY = -100.0
 moveSpeed = 100.0
@@ -36,7 +33,7 @@ delay = 0.5
 position = Vector2( 439.96, 263.178 )
 
 [node name="AnimatedSprite" parent="Spike3" index="0"]
-frame = 2
+frame = 0
 
 [node name="Movable" parent="Spike3" index="2"]
 moveDistanceY = -100.0
@@ -46,7 +43,7 @@ moveSpeed = 100.0
 position = Vector2( 854.869, 279 )
 
 [node name="AnimatedSprite" parent="Spike4" index="0"]
-frame = 2
+frame = 0
 
 [node name="Movable" parent="Spike4" index="2"]
 moveDistanceY = -100.0
@@ -56,6 +53,9 @@ delay = 0.125
 [node name="Spike5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 916.402, 279 )
 
+[node name="AnimatedSprite" parent="Spike5" index="0"]
+frame = 0
+
 [node name="Movable" parent="Spike5" index="2"]
 moveDistanceY = -100.0
 moveSpeed = 200.0
@@ -63,6 +63,9 @@ delay = 0.25
 
 [node name="Spike2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 795.094, 280.758 )
+
+[node name="AnimatedSprite" parent="Spike2" index="0"]
+frame = 0
 
 [node name="Movable" parent="Spike2" index="2"]
 moveDistanceY = -100.0

@@ -11,31 +11,31 @@
 position = Vector2( 49.4747, 2.93559 )
 tile_set = ExtResource( 2 )
 format = 1
-tile_data = PoolIntArray( 65535, 48, 0, 131071, 48, 0, 65557, 47, 0, 196607, 48, 0, 131093, 47, 0, 262143, 48, 0, 196629, 47, 0, 327679, 48, 0, 262165, 47, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 43, 0, 327684, 19, 0, 327688, 12, 0, 327689, 41, 0, 327690, 30, 0, 327691, 30, 0, 327692, 19, 0, 327697, 12, 0, 327698, 33, 0, 327699, 33, 0, 327700, 33, 0, 393220, 48, 0, 393224, 47, 0, 393228, 48, 0, 393233, 47, 0, 458757, 43, 0, 458758, 43, 0, 458759, 43, 0, 458765, 43, 0, 458766, 43, 0, 458767, 43, 0, 458768, 41, 0 )
+tile_data = PoolIntArray( 65535, 75, 0, 0, 53, 0, 1, 53, 0, 2, 52, 0, 3, 53, 0, 4, 53, 0, 5, 53, 0, 6, 52, 0, 7, 52, 0, 8, 53, 0, 9, 53, 0, 10, 52, 0, 11, 52, 0, 12, 53, 0, 13, 53, 0, 14, 52, 0, 15, 52, 0, 16, 52, 0, 17, 53, 0, 18, 53, 0, 19, 53, 0, 20, 53, 0, 21, 74, 0, 131071, 48, 0, 65557, 47, 0, 196607, 48, 0, 131093, 47, 0, 262143, 48, 0, 196629, 47, 0, 327679, 48, 0, 262165, 47, 0, 393215, 72, 0, 327680, 31, 0, 327681, 31, 0, 327682, 31, 0, 327683, 43, 0, 327684, 19, 0, 327688, 12, 0, 327689, 41, 0, 327690, 30, 0, 327691, 30, 0, 327692, 19, 0, 327697, 12, 0, 327698, 33, 0, 327699, 33, 0, 327700, 33, 0, 327701, 73, 0, 393220, 48, 0, 393224, 47, 0, 393228, 48, 0, 393233, 47, 0, 458756, 72, 0, 458757, 43, 0, 458758, 43, 0, 458759, 43, 0, 458760, 73, 0, 458764, 72, 0, 458765, 43, 0, 458766, 43, 0, 458767, 43, 0, 458768, 41, 0, 458769, 73, 0 )
 
 [node name="MainCharacter" parent="." instance=ExtResource( 1 )]
 position = Vector2( 50.0175, 282.426 )
 
 [node name="Spike" parent="." instance=ExtResource( 3 )]
-position = Vector2( 355.093, 405.077 )
+position = Vector2( 348.061, 426.174 )
 
 [node name="Spike2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 420.356, 409.368 )
+position = Vector2( 408.049, 426.949 )
 
 [node name="Spike3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 478.181, 409.599 )
+position = Vector2( 478.181, 427.18 )
 
 [node name="Spike4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 866.563, 415.658 )
+position = Vector2( 866.563, 424.448 )
 
 [node name="Spike5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 922.334, 417.166 )
+position = Vector2( 924.092, 425.957 )
 
 [node name="Spike6" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1002.22, 414.151 )
+position = Vector2( 984.639, 424.7 )
 
 [node name="Spike7" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1048.95, 421.688 )
+position = Vector2( 1050.71, 425.204 )
 
 [node name="DashMask" parent="." instance=ExtResource( 4 )]
 position = Vector2( 602.04, 286.03 )
@@ -44,4 +44,4 @@ position = Vector2( 602.04, 286.03 )
 position = Vector2( 238.771, 287.537 )
 
 [node name="Teleport" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1275.28, 232.997 )
+position = Vector2( 1275.28, 236.513 )
