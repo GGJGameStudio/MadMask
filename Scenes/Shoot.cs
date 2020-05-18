@@ -3,7 +3,7 @@ using System;
 
 public class Shoot : Node2D
 {
-    private PackedScene proj = (PackedScene)GD.Load("res://scenes/Proj.tscn");
+    private PackedScene proj = (PackedScene)GD.Load("res://Scenes/Proj.tscn");
 
     public float rate = 1.5f;
 
@@ -35,12 +35,13 @@ public class Shoot : Node2D
         {
             var proj_instance = (Proj)proj.Instance();
             proj_instance.Rotation = Mathf.Deg2Rad((orientation == EntityOrientation.Right) ? 0 : 180);
-            if (boosted){
-               proj_instance.SetBoosted();
+            if (boosted)
+            {
+                proj_instance.SetBoosted();
             }
             GetParent().GetParent().AddChild(proj_instance);
             proj_instance.GlobalPosition = GlobalPosition;
-            
+
 
             cooldown = 1 / rate;
             return true;

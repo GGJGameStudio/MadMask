@@ -7,7 +7,7 @@ public class Canon : Node2D
     // private int a = 2;
     // private string b = "text";
 
-    private PackedScene proj = (PackedScene)GD.Load("res://scenes/Proj.tscn");
+    private PackedScene proj = (PackedScene)GD.Load("res://Scenes/Proj.tscn");
 
     private EntityOrientation orientation;
 
