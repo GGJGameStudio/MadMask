@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LaserLizardAfrobeat3.ogg-69a99d1062478ad4134bfc84b3c09bdd.oggstr"
+
+[deps]
+
+source_file="res://Assets/LaserLizardAfrobeat3.ogg"
+dest_files=[ "res://.import/LaserLizardAfrobeat3.ogg-69a99d1062478ad4134bfc84b3c09bdd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

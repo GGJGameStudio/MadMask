@@ -20,6 +20,10 @@ run/main_scene="res://Scenes/Lobby.tscn"
 boot_splash/image="res://SplashScreen.png"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalMusic="*res://Utils/GlobalMusic.tscn"
+
 [input]
 
 ui_left={
